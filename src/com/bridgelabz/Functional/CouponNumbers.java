@@ -7,6 +7,7 @@ public class CouponNumbers {
 		new Util();
 		System.out.println("Enter value of n");
 		int n=Util.inputInt();
+		System.out.println("total random no. req:");
 		Util.couponNumbers(n);
 	}
 

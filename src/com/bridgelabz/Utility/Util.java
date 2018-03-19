@@ -210,6 +210,10 @@ public class Util {
 		return t;
 
 	}
+	
+	public static void TwoDArray(int arr[]){
+		
+	}
 
 	public static void toBinary(int n) {
 		
@@ -284,27 +288,90 @@ public class Util {
 		System.out.println("Decimal value after swapping: "+dec);
 	}
 
-	public static void Array(int m, int n) {
+	public static void TwoDArray(int m, int n) {
 		
-		int arr[][]=new int[m][n];
-		for(int i=0;i<m;i++)
+       // PrintWriter pw = new PrintWriter(System.out);
+		System.out.println("Enter your choice\n1.Integer\n2.Double\n3.Boolean");
+		int ch=inputInt();
+		System.out.println("Enter the elements:");
+		switch(ch)
 		{
-			for(int j=0;j<n;j++)
+		
+		case 1:
+			int arr[][]=new int[m][n];
+
+			for(int i=0;i<m;i++)
 			{
-				arr[i][j]=Util.inputInt();
+				for(int j=0;j<n;j++)
+				{
+					arr[i][j]=Util.inputInt();
+				}
 			}
+			
+			System.out.println("2D array:");
+			for(int i=0;i<m;i++)
+			{
+				for(int j=0;j<n;j++)
+				{
+					System.out.print(arr[i][j]+" ");
+				}
+				System.out.println();
+			}
+			
+			break;
+		
+		case 2:
+			double brr[][]=new double[m][n];
+
+			for(int i=0;i<m;i++)
+			{
+				for(int j=0;j<n;j++)
+				{
+					brr[i][j]=Util.inputDouble();
+				}
+			}
+			
+			System.out.println("2D array:");
+			for(int i=0;i<m;i++)
+			{
+				for(int j=0;j<n;j++)
+				{
+					System.out.print(brr[i][j]+" ");
+				}
+				System.out.println();
+			}
+			
+			break;
+			
+		case 3:
+			boolean crr[][]=new boolean[m][n];
+
+			for(int i=0;i<m;i++)
+			{
+				for(int j=0;j<n;j++)
+				{
+					crr[i][j]=sc.nextBoolean();
+				}
+			}
+			
+			System.out.println("2D array:");
+			for(int i=0;i<m;i++)
+			{
+				for(int j=0;j<n;j++)
+				{
+					System.out.print(crr[i][j]+" ");
+				}
+				System.out.println();
+			}
+			
+			break;
+		
 		}
 		
-        PrintWriter pw = new PrintWriter(System.out);
+		
         
 		
-		for(int i=0;i<m;i++)
-		{
-			for(int j=0;j<n;j++)
-			{
-				pw.print(arr[i][j]);
-			}
-		}
+		
 		
 	}
 	
@@ -715,7 +782,7 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 		if(l<=h)
 		{
-			int mid=l+(h-l)/2;
+			int mid=(h+l)/2;
 			
 			if(str[mid].equals(word))
 			{
@@ -765,8 +832,6 @@ public static void insertionSortInt(int n, int arr[]) {
 	public static String ticTacToe(char[][] arr) {
 		
 		Random r=new Random();
-		//boolean userwin=false;
-		//boolean compwin=false;
 		int a,b,x,y; String result="";
 		
 		while(result!="computer" && result!="user")
@@ -930,4 +995,9 @@ public static void insertionSortInt(int n, int arr[]) {
 		return "";
 		
 	}
+	
+	
+	
 }
+
+
