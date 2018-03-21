@@ -27,7 +27,7 @@ public class TicTacToe {
 		}
 		
 		String result=Util.ticTacToe(arr);
-		System.out.println(result+" wins!");
+		System.out.println(result);
 	}
 
 }

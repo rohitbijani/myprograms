@@ -1,6 +1,5 @@
 package com.bridgelabz.Utility;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -708,23 +707,26 @@ public static void insertionSortInt(int n, int arr[]) {
 	}
 
 
-	public static void findNumber(int n, int x) {
+	public static void findNumber(int l, int h) {
 		
-		int l=0; int h=n-1; int m=(h-l)/2;
+		int m=0;
 		String str="";
-		while(l<h)
+		
+		if(l<h)
 		{
-			
+			m=(h+l)/2;
 			System.out.println("Is no. between "+l+" and "+m);
 			str=Util.inputString();
+			
 			if(str=="true")
 			{
-				continue;
+								
+				findNumber(l, m);
 			}
 			else
 			{
-				l=m+1;
-				m=h;
+				
+				findNumber(m+1, h);
 				
 			}
 			
@@ -758,24 +760,32 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 	}
 
-	public static int vendingMachine(int amt) {
+	public static void vendingMachine(int amt) {
 		
 		int r=0;int s=0;
-		int notes[]={1000,500,100,50,20,10,2,1};
+		int notes[]={1000,500,100,50,20,10,5,2,1};
+		int val[]=new int[9];
 		for(int i=0;i<notes.length;i++)
 		{
 			if(amt!=0)
 			{
 				r=amt/notes[i];	
-				
+				val[i]=r;
 				s+=r;
 				amt=amt%notes[i];
 			}
 			
-
 		}
 		
-		return s;
+		for(int i=0;i<9;i++)
+		{
+			if(val[i]!=0)
+			{
+				System.out.println(val[i]+" of Rs. "+notes[i]);
+			}
+			
+		}
+		System.out.println("Total notes: "+s);
 	}
 
 	public static int binarySearchString(int l, int h, String word, String str[]) {
@@ -861,6 +871,9 @@ public static void insertionSortInt(int n, int arr[]) {
 			result=result(arr);
 			
 		}
+		
+		if(result==null)
+			return "draw";
 		
 		return result;
 	}
@@ -992,9 +1005,47 @@ public static void insertionSortInt(int n, int arr[]) {
 		{
 			return "computer";
 		}
-		return "";
+		
+		return null;
 		
 	}
+
+	public static void primeAnagram(int n) {
+		
+		int k=2;
+		String str="";
+		while(k<=n)
+		{
+			int c=0;
+			for(int i=1; i<=k; i++)
+			{
+				if(k%i==0)
+					c++;
+			}
+			
+			if(c==2)
+			{
+				str=str+k+" ";
+			}
+			
+			k++;
+		}
+		
+		String prime[]=str.split("\\s");
+		
+		for(int i=0; i<prime.length-1; i++)
+		{
+			for(int j=i+1; j<prime.length; j++)
+			{
+				if(anagram(prime[i], prime[j]))
+				{
+					System.out.println(prime[i]+" and "+prime[j]);
+				}
+			}
+		}
+				
+	}
+		
 	
 	
 	

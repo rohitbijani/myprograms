@@ -7,9 +7,9 @@ public class FindNumber {
 		new Util();
 		System.out.println("enter value of range in 2^n");
 		int n=Util.inputInt();
-		System.out.println("think of any no. in 0-"+n);
+		System.out.println("think of any no. in 0-"+(n-1));
 		int x=Util.inputInt();
-		Util.findNumber(n,x);
+		Util.findNumber(0,n-1);
 	}
 
 }

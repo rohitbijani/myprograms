@@ -2,12 +2,14 @@ package com.bridgelabz.Algorithm;
 
 import com.bridgelabz.Utility.Util;
 
-public class VendingMachine {
+public class PrimeAnagram {
+
 	public static void main(String[] args) {
+		
 		new Util();
-		System.out.println("enter amt to return");
-		int amt=Util.inputInt();
-		Util.vendingMachine(amt);
+		int n=1000;
+		System.out.println("Prime anagrams are:");
+		Util.primeAnagram(n);
 		
 	}
 

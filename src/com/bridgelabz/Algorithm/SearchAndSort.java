@@ -11,7 +11,7 @@ public class SearchAndSort {
 		int arr[]=new int[n];
 		String str[]=new String[n];
 		
-		System.out.println("Binary search for integer");
+		System.out.println("Binary search for integer:");
 		System.out.println("Enter the integer to be searched");
 		int x=Util.inputInt();		
 		Util.binarySearchInt(0,n-1,x,arr);

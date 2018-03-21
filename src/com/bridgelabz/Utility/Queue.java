@@ -1,15 +1,16 @@
 package com.bridgelabz.Utility;
 
-public class Stack<T> {
-
-	LinkedList<T> stack=new LinkedList<>();
-	public int top;
+public class Queue<T> {
+	
+	LinkedList<T> queue=new LinkedList<>();
+	int front, rear;
 	int capacity;
 	
-	public Stack(int size)
-	{		
+	public Queue(int size)
+	{
 		capacity=size;
-		top=-1;
+		front =-1;
+		rear=-1;
 		
 	}
 	
@@ -23,11 +24,11 @@ public class Stack<T> {
 	{
 		if(!isEmpty())
 		{
-			return stack.getLastElement();
+			return queue.getLastElement();
 		}
 		else
 		{	
-			System.out.println("Stack is empty!!");
+			System.out.println("Queue is empty!!");
 			return null;
 		}
 		
@@ -35,7 +36,7 @@ public class Stack<T> {
 	
 	public boolean isEmpty()
 	{
-		if(top==-1)
+		if(rear==-1)
 		{
 			return true;
 		}
@@ -47,7 +48,7 @@ public class Stack<T> {
 	
 	public boolean isFull()
 	{
-		if(top==capacity)
+		if(rear==capacity)
 		{
 			return true;
 		}
@@ -57,38 +58,38 @@ public class Stack<T> {
 		}
 	}
 	
-	public void push(T element)
+	public void enqueue(T element)
 	{
 		if(!isFull())
 		{
-			stack.addAtEnd(element);
-			top++;
+			queue.addAtEnd(element);
+			rear++;
 			
 		}
 		else
 		{
-			System.out.println("Stack is full!!");
+			System.out.println("Queue is full!!");
 		}
 		
 	}
 	
-	public T pop()
+	public T dequeue()
 	{
 		if(!isEmpty())
 		{
 			T x=peek();
-			stack.remove(x);
-			top--;
+			queue.removeAtFirst(x);
+			rear++;
 			
 			return x;
 		}
 		else
 		{
-			System.out.println("Stack is empty!!");
+			System.out.println("Queue is empty!!");
 			return null;
 
 		}
 		
 	}
-	
+
 }

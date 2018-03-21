@@ -34,10 +34,12 @@ public class UnorderedList {
 
 		if(check==true)
 		{
+			System.out.println("word found!");
 			list.remove(word);			
 		}
 		else
 		{
+			System.out.println("word not found!");
 			list.addAtStart(word);
 		}
 		

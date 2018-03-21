@@ -83,6 +83,8 @@ public class LinkedList<T> {
 	public void remove(T val) {
 		
 		Node<T> current=head;
+		size--;
+		
 		while(current.getNext()!=null)
 		{
 			if(current.getData() == val)
@@ -90,12 +92,27 @@ public class LinkedList<T> {
 				Node<T> temp=current.getNext();
 				temp=temp.getNext();
 				current.setNext(temp);
-				size--;
+				
 				break;
 			}
 			
 			current=current.getNext();
-		}	
+		}
+		
+	}
+	
+	public void removeAtFirst(T val) {
+		
+		if(head==null)
+		{
+			System.out.println("");
+		}
+		
+		T current=head.getData();
+		head=head.getNext();
+		
+		size--;
+		
 	}
 	
 	public void order()
@@ -129,5 +146,6 @@ public class LinkedList<T> {
 		}
 
 	}
+
 	
 }
