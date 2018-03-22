@@ -72,16 +72,16 @@ public class Util {
 		}
 	}
 	
-	public static void dayOfWeek(int m,int d,int y){
+	public static int dayOfWeek(int m,int d,int y){
 		
 		int a = y - ((14-m)/12) ;
 		int x = a + a/4 - a/100 + a/400;
 		int b = m + 12 * ((14 - m) / 12) - 2;
 		int c = (d + x + 31*b/12)%7;
 		
-		String day[]={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+		//String day[]={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 				 
-		System.out.println(day[c-1]);
+		return (c);
 		
 	}
 	
@@ -714,19 +714,22 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 		if(l<h)
 		{
-			m=(h+l)/2;
-			System.out.println("Is no. between "+l+" and "+m);
+			
+			System.out.println("Is no. between "+l+" and "+h);
 			str=Util.inputString();
 			
 			if(str=="true")
 			{
-								
-				findNumber(l, m);
+				m=(h+l)/2;
+				h=m;				
+				findNumber(l, h);
+				
 			}
 			else
 			{
-				
-				findNumber(m+1, h);
+				m=(h+l)/2;
+				l=m+1;
+				findNumber(l, h);
 				
 			}
 			
@@ -1045,9 +1048,78 @@ public static void insertionSortInt(int n, int arr[]) {
 		}
 				
 	}
+
+	public static void primePalindrome(int n) {
 		
-	
-	
+		int k=2;
+		while(k<=n)
+		{
+			int c=0;
+			for(int i=1; i<=k; i++)
+			{
+				if(k%i==0)
+					c++;
+			}
+			
+			if(c==2)
+			{
+				
+				int temp=k; int rev=0;
+				while(temp!=0)
+				{
+					int rem=temp%10;
+					rev=rev*10 + rem;
+					temp=temp/10;
+					
+				}
+				if(rev==k)
+				{
+					System.out.println(k);
+					
+				}
+			}
+			
+			k++;
+		}
+	}
+
+	public static void PrimeArray(int n) {
+		
+		int arr[][]=new int[100][n/100];
+		int k=2; int range=0; int pos=0;
+
+		while(k<=n)
+		{
+			int c=0;
+			for(int i=1; i<=k; i++)
+			{
+				if(k%i==0)
+					c++;
+			}
+			
+			if(c==2)
+			{			
+				arr[pos][range]=k;
+				pos++;
+				
+				if(k%100==0)
+					range++;
+			}
+									
+			k++;
+		}
+		
+		for(int i=0; i<100; i++)
+		{
+			for(int j=0; j<n/100; j++)
+			{
+				System.out.println(arr[i][j]);
+		
+			}
+		}
+		
+		
+	}	
 	
 }
 
