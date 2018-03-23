@@ -7,8 +7,9 @@ public class Permutation {
 		new Util();
 		System.out.println("enter the string");
 		String str=Util.inputString();
-		Util.iterativeFunc(str);
-		Util.recursiveFunc(str);
+		char a[]=str.toCharArray();
+		//Util.iterativePermutation(a);
+		Util.recursivePermutation(a,0);
 	}
 
 }

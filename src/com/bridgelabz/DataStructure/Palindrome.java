@@ -15,10 +15,34 @@ public class Palindrome {
 			
 		for(int i=0; i<len; i++)
 		{
-			deque.addRear(word.charAt(i));
+			deque.addFront(word.charAt(i));
 		}
 		
+		String pal="";
+		for(int i=0; i<len; i++)
+		{
+			pal+=""+deque.removeFront();
+			
+		}
 		
+		boolean flag=true;
+		for(int i=0;i<word.length();i++)
+		{
+			if(pal.charAt(i)!=word.charAt(i))
+			{
+				flag=false;
+				break;
+			}
+			
+		}
+		if(flag==true)
+		{
+			System.out.println("Palindrome!");
+		}
+		else
+		{
+			System.out.println("Not a Palindrome!");
+		}
 	}
 
 }

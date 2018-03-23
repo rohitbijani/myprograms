@@ -1,8 +1,12 @@
 package com.bridgelabz.Utility;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 //import com.bridgeit.Algorithm.*;
 
@@ -39,7 +43,7 @@ public class Util {
 	public static String inputString()
 	{
 		try{
-			return sc.next();
+			return sc.nextLine();
 		}
 		catch(Exception e){
 			System.out.println(e);
@@ -62,13 +66,15 @@ public class Util {
 	
 	public static void UserName(String name)
 	{
+		String msg="Hello <<UserName>>, How are you?";
 		if(name.length()<3)
 		{
 			System.out.println("Minimum characters must be 3");
 		}
 		else
 		{
-			System.out.println("Hello "+name+", How are you?");
+			msg=msg.replace("<<UserName>>", name);
+			System.out.println(msg);
 		}
 	}
 	
@@ -282,7 +288,7 @@ public class Util {
 	          dec += temp*Math.pow(2, c);  
 	          bin = bin/10;  
 	          c++;  
-		}
+		}	
 		
 		System.out.println("Decimal value after swapping: "+dec);
 	}
@@ -573,23 +579,65 @@ public static void insertionSortInt(int n, int arr[]) {
 			}
 		}
 		
+		
+		
 		System.out.println("no. of triplets= "+c);
 	}
 
-	public static void iterativeFunc(String str) {
+	public static void iterativePermutation(char a[]) {
 		
-		int len=str.length();
-		for(int i=0;i<len;i++)
+		int len=a.length; int pos=0; int i=0;
+		while(pos<len)
 		{
-			//for()
+			char temp=a[pos];
+			a[pos]=a[i];
+			a[i]=temp;
+			
+			pos++;
+			
+			if(pos==len)
+			{
+				for(int i1=0;i1<len;i1++)
+				{
+					System.out.print(a[i1]);
+				}
+				
+				System.out.println();
+			}
+			
+			i++;
 		}
-		
 	}
 
-	public static void recursiveFunc(String str) {
+	public static void recursivePermutation(char a[], int pos) {
 		
-		int len=str.length();
+		int len=a.length; 
 		
+		if(pos==len)
+		{
+			for(int i=0; i<len; i++)
+			{
+				System.out.print(a[i]);
+			}
+			
+			System.out.println();
+		}
+		else
+		{
+			for(int i=pos; i<len; i++)
+			{
+				char temp=a[pos];
+				a[pos]=a[i];
+				a[i]=temp;
+				
+				recursivePermutation(a, pos+1);
+				
+				temp=a[pos];
+				a[pos]=a[i];
+				a[i]=temp;
+				
+			}
+		}
 		
 	}
 
@@ -1119,7 +1167,124 @@ public static void insertionSortInt(int n, int arr[]) {
 		}
 		
 		
-	}	
+	}
+
+	public static void calendarMonth(int days, int day, String[][] cal) {
+		
+		int count=1;
+		
+		for(int i=0;i<6;i++)
+		{
+			for(int j=day;j<7;j++)
+			{
+				if(count>days)
+				{
+					break;
+				}
+				
+				cal[i][j]=Integer.toString(count);
+				count++;
+			}
+			day=0;
+		}
+		
+		for(int i=0;i<6;i++)
+		{
+			for(int j=0;j<7;j++)
+			{
+				if(cal[i][j]==null)
+				{
+					cal[i][j]="";
+				}	
+			}
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray inventory() {
+		
+		JSONObject rice=new JSONObject();
+		rice.put("name", "rice");
+		rice.put("weight", "50");
+		rice.put("price per kg", "Rs.100");
+		JSONObject pulses=new JSONObject();
+		pulses.put("name", "pulses");
+		pulses.put("weight", "10");
+		pulses.put("price per kg", "Rs.30");
+		JSONObject wheat=new JSONObject();
+		wheat.put("name", "wheat");
+		wheat.put("weight", "20");
+		wheat.put("price per kg", "Rs.50");
+		
+		JSONArray arr=new JSONArray();
+		arr.add(rice);
+		arr.add(wheat);
+		arr.add(pulses);
+		
+		return arr;
+			
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONArray stockReport(int n) {
+		
+		
+		JSONObject obj1=new JSONObject();
+		JSONObject obj2=new JSONObject();
+		//JSONObject obj3=new JSONObject();
+		JSONArray arr=new JSONArray();
+		int total=0;
+		
+		for(int i=0; i<n; i++)
+		{
+			int val=0;
+			System.out.println("Stock "+ (i+1));
+			
+			System.out.println("enter share name");
+			String name=Util.inputString();
+			obj1.put("name", name);
+			
+			System.out.println("enter no. of shares");
+			int count=Util.inputInt();			
+			obj1.put("number of shares", count);
+			
+			System.out.println("enter share price");
+			int price=Util.inputInt();
+			obj1.put("price", price);
+			
+			val=count*price;
+			System.out.println("Value of "+ name +" stocks: "+val);
+			
+			total+=val;
+			
+			obj2.put((i+1), obj1);	
+			System.out.println();
+		}
+		
+		arr.add(obj2);
+		
+		System.out.println("Total value: "+ total);
+		return arr;
+				
+	}
+
+	public static JSONArray inventoryManagement(JSONObject obj) {
+		
+		JSONArray arr=new JSONArray();
+		
+		for(int i=0; i<arr.size(); i++)
+		{
+			arr.get(i);
+		}
+		
+		return arr;
+		
+		
+		
+		
+	}
+
 	
 }
 
