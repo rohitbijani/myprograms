@@ -29,6 +29,17 @@ public class Util {
 		return 0;
 	}
 	
+	public static long inputLong()
+	{
+		try{
+			return sc.nextLong();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return 0;
+	}
+	
 	public static double inputDouble()
 	{
 		try{
@@ -1206,16 +1217,16 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 		JSONObject rice=new JSONObject();
 		rice.put("name", "rice");
-		rice.put("weight", "50");
-		rice.put("price per kg", "Rs.100");
+		rice.put("weight", 50);
+		rice.put("price per kg", 100);
 		JSONObject pulses=new JSONObject();
 		pulses.put("name", "pulses");
-		pulses.put("weight", "10");
-		pulses.put("price per kg", "Rs.30");
+		pulses.put("weight", 10);
+		pulses.put("price per kg", 30);
 		JSONObject wheat=new JSONObject();
 		wheat.put("name", "wheat");
-		wheat.put("weight", "20");
-		wheat.put("price per kg", "Rs.50");
+		wheat.put("weight", 20);
+		wheat.put("price per kg", 50);
 		
 		JSONArray arr=new JSONArray();
 		arr.add(rice);
@@ -1269,19 +1280,31 @@ public static void insertionSortInt(int n, int arr[]) {
 				
 	}
 
-	public static JSONArray inventoryManagement(JSONObject obj) {
+	@SuppressWarnings("unchecked")
+	public static JSONArray inventoryManagement(JSONArray arr) {
 		
-		JSONArray arr=new JSONArray();
-		
+		JSONObject obj1=new JSONObject();
+		JSONArray jarr=new JSONArray();
+		long price,weight,val;
 		for(int i=0; i<arr.size(); i++)
 		{
-			arr.get(i);
+			obj1=(JSONObject)arr.get(i);
+			String name=(String)obj1.get("name");
+			price=(long)obj1.get("price per kg");
+			weight=(long)obj1.get("weight");
+			val= price*weight;
+			
+			JSONObject obj2=new JSONObject();
+
+			System.out.println(name+" value: "+val);
+			obj2.put("name", name);
+			obj2.put("value", val);
+			jarr.add(obj2);
+			
 		}
 		
-		return arr;
 		
-		
-		
+		return jarr;
 		
 	}
 
