@@ -8,7 +8,13 @@ public class FlipCoin {
 		new Util();
 		System.out.println("enter number of times to flip");
 		int n=Util.inputInt();
-		Util.flipcoin(n);
+		if(n<0)
+		{
+			System.out.println("Enter positive no. only!");
+		}
+		else{
+			Util.flipcoin(n);
+		}
 				
 }
 }

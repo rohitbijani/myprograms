@@ -7,7 +7,7 @@ public class Name
 public static void main(String args[])
 {
 	new Util();
-	System.out.println("Hello <<UserName>>, How are you?");
+	//System.out.println("Hello <<UserName>>, How are you?");
 	System.out.println("Enter name");
 	
 	String name=Util.inputString();

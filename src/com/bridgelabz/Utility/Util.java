@@ -54,12 +54,23 @@ public class Util {
 	public static String inputString()
 	{
 		try{
+			return sc.next();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public static String inputStringLine()
+	{
+		try{
 			return sc.nextLine();
 		}
 		catch(Exception e){
 			System.out.println(e);
 		}
-		return "";
+		return null;
 	}
 	
 	public static char inputChar()
@@ -1179,6 +1190,27 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 		
 	}
+	
+	public static double binarySearchTree(int n) {
+		
+		double bst=factorial(2*n)/(factorial(n+1) * factorial(n));
+		
+		return bst;
+		
+	}
+	
+	public static int factorial(int n)
+	{
+		int result;
+		
+		if(n==0 || n==1)
+		return 1;
+		
+		result=factorial(n-1)*n;
+		
+		return result;
+		
+	}
 
 	public static void calendarMonth(int days, int day, String[][] cal) {
 		
@@ -1209,6 +1241,16 @@ public static void insertionSortInt(int n, int arr[]) {
 				}	
 			}
 		}
+		
+	}
+	
+	public static Queue<String>[] calendarQueue(Queue<String>[] week) {
+		
+		
+		
+		return week;
+		
+		
 		
 	}
 	
@@ -1307,6 +1349,10 @@ public static void insertionSortInt(int n, int arr[]) {
 		return jarr;
 		
 	}
+
+	
+
+	
 
 	
 }
