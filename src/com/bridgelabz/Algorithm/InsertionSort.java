@@ -14,10 +14,10 @@ public class InsertionSort {
 		{
 			arr[i]=Util.inputString();
 		}
-		Util.insertionSortString(n,arr);
+		Util.insertionSort(n,arr);
 		
 		System.out.println("Sorted array:");
-		Util.printArrayString(arr);
+		Util.printArray(arr);
 	}
 
 }

@@ -10,6 +10,7 @@ import com.bridgelabz.Utility.Util;
 
 public class Hashing {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
 		
 		new Util();

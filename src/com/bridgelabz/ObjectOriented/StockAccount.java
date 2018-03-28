@@ -42,6 +42,15 @@ public class StockAccount {
 		System.out.println("Enter balance");
 		bal=Util.inputLong();
 		
+		/*shares.put("@", 0);
+		shares.put("$", 0);
+		shares.put("*", 0);
+		obj.put("userid",uid);
+		obj.put("balance", bal);
+		obj.put("shares", shares);
+		user.put(uname, obj);
+		userArray.add(user);
+		*/		
 		obj.put("userid",uid);
 		obj.put("balance", bal);
 		obj.put("no. of shares", 0);
@@ -90,49 +99,58 @@ public class StockAccount {
 		long price=(long)company.get("price");
 		long quantity=(long)company.get("quantity");
 		long amount=numberOfShares*price;
-		
-		JSONObject obj= (JSONObject) userArray.get(0);
-		JSONObject user= (JSONObject) obj.get(uname);
-		long balance=(long)user.get("balance");
-		long count=(long)user.get("no. of shares");
-		
-		if(amount>balance)
+	
+		for(int i=0; i<userArray.size(); i++)
 		{
-			System.out.println("Insufficient balance!");
-		}
-		else if(numberOfShares>quantity)
-		{
-			System.out.println("Only "+quantity+" available!");
-		}
-		else if(quantity==0)
-		{
-			System.out.println("Shares sold out!");
-		}
-		else
-		{
-			balance-=amount;
-			count++;
-			user.put("balance", balance);
-			user.put("no. of shares", count);
-			obj.put(uname, user);
-			userArray.remove(0);
-			userArray.add(obj);
+			JSONObject obj= (JSONObject) userArray.get(i);
 			
-			quantity-=numberOfShares;
-			company.put("quantity", quantity);
-			newobj.put(symbol, company);
-			companyArray.remove(0);
-			companyArray.add(newobj);
-			
-			fileWriter=new FileWriter(userFile);
-			fileWriter.write(userArray.toJSONString());
-			fileWriter.close();
-			
-			fileWriter=new FileWriter(companyFile);
-			fileWriter.write(companyArray.toJSONString());
-			fileWriter.close();
+			if(obj.containsKey(uname))
+			{
+				JSONObject user= (JSONObject) obj.get(uname);
+				long balance=(long)user.get("balance");
+				long count=(long)user.get("no. of shares");
+				
+				if(amount>balance)
+				{
+					System.out.println("Insufficient balance!");
+				}
+				else if(numberOfShares>quantity)
+				{
+					System.out.println("Only "+quantity+" available!");
+				}
+				else if(quantity==0)
+				{
+					System.out.println("Shares sold out!");
+				}
+				else
+				{
+					balance-=amount;
+					count++;
+					user.put("balance", balance);
+					user.put("no. of shares", count);
+					obj.put(uname, user);
+					userArray.remove(i);
+					userArray.add(obj);
+					
+					quantity-=numberOfShares;
+					company.put("quantity", quantity);
+					newobj.put(symbol, company);
+					companyArray.remove(0);
+					companyArray.add(newobj);
+					
+					fileWriter=new FileWriter(userFile);
+					fileWriter.write(userArray.toJSONString());
+					fileWriter.close();
+					
+					fileWriter=new FileWriter(companyFile);
+					fileWriter.write(companyArray.toJSONString());
+					fileWriter.close();
+					
+				}				
+			}
 			
 		}
+	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -144,42 +162,50 @@ public class StockAccount {
 		long price=(long)company.get("price");
 		long quantity=(long)company.get("quantity");
 		long amount=numberOfShares*price;
-		
-		JSONObject obj= (JSONObject) userArray.get(0);
-		JSONObject user= (JSONObject) obj.get(uname);
-		long balance=(long)user.get("balance");
-		long count=(long)user.get("no. of shares");
-		
-		if(numberOfShares>count)
+
+		for(int i=0; i<userArray.size(); i++)
 		{
-			System.out.println("Cannot sell more than "+count+" shares!");
-		}
-		else
-		{
-			balance+=amount;
-			count--;
-			user.put("balance", balance);
-			user.put("no. of shares", count);
-			obj.put(uname, user);
-			userArray.remove(0);
-			userArray.add(obj);
+			JSONObject obj= (JSONObject) userArray.get(i);
 			
-			quantity+=numberOfShares;
-			company.put("quantity", quantity);
-			newobj.put(symbol, company);
-			companyArray.remove(0);
-			companyArray.add(newobj);
-			
-			fileWriter=new FileWriter(userFile);
-			fileWriter.write(userArray.toJSONString());
-			fileWriter.close();
-			
-			fileWriter=new FileWriter(companyFile);
-			fileWriter.write(companyArray.toJSONString());
-			fileWriter.close();
-			
-		}
+			if(obj.containsKey(uname))
+			{
+
+				JSONObject user= (JSONObject) obj.get(uname);
+				long balance=(long)user.get("balance");
+				long count=(long)user.get("no. of shares");
 				
+				if(numberOfShares>count)
+				{
+					System.out.println("Cannot sell more than "+count+" shares!");
+				}
+				else
+				{
+					balance+=amount;
+					count--;
+					user.put("balance", balance);
+					user.put("no. of shares", count);
+					obj.put(uname, user);
+					userArray.remove(0);
+					userArray.add(obj);
+					
+					quantity+=numberOfShares;
+					company.put("quantity", quantity);
+					newobj.put(symbol, company);
+					companyArray.remove(0);
+					companyArray.add(newobj);
+					
+					fileWriter=new FileWriter(userFile);
+					fileWriter.write(userArray.toJSONString());
+					fileWriter.close();
+					
+					fileWriter=new FileWriter(companyFile);
+					fileWriter.write(companyArray.toJSONString());
+					fileWriter.close();
+					
+				}				
+			
+			}
+		}				
 		
 	}	
 	
@@ -188,10 +214,12 @@ public class StockAccount {
 		new StockAccount();
 		System.out.println("Enter existing user name");
 		uname=Util.inputString();
-		JSONObject obj= (JSONObject) userArray.get(0);
 		
-		for(int i=0; i<obj.size(); i++)
+		
+		for(int i=0; i<userArray.size(); i++)
 		{
+			JSONObject obj= (JSONObject) userArray.get(i);
+			
 			if(obj.containsKey(uname))
 			{
 				JSONObject newobj=(JSONObject) obj.get(uname);
@@ -206,10 +234,12 @@ public class StockAccount {
 	
 	public static void main(String[] args) throws IOException, ParseException {
 		
+		do{	
+			
 		new Util();
 		StockAccount stock=new StockAccount();
 		
-		do{		
+			
 		System.out.println("Enter your choice\n1.Sign up\n2.Login\n3.Buy shares\n4.Sell shares\n5.Print report\n6.EXIT");
 		int ch=Util.inputInt();
 		switch(ch)
@@ -255,7 +285,7 @@ public class StockAccount {
 			
 			System.out.println("----STOCK REPORT----");
 			stock.printReport();
-			
+			System.out.println();
 			break;
 			
 		case 6:

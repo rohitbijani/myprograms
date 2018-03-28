@@ -8,8 +8,7 @@ public class CalendarQueue {
 	public static void main(String[] args) {
 		
 		new Util();
-		Queue<String> week[] = new Queue[7];
-		Util.calendarQueue(week);
+		Util.calendarQueue(Calendar.cal);
 		
 		
 	}

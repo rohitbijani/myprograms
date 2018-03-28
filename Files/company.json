@@ -1,5 +1,1 @@
-[{
-"@":{"quantity":388,"price":1000,"name":"Deloitte"},
-"$":{"quantity":545,"price":950,"name":"Cipla"},
-"*":{"quantity":750,"price":1800,"name":"Tata"}
-}]
+[{"@":{"quantity":384,"price":1000,"name":"Deloitte"},"$":{"quantity":524,"price":950,"name":"Cipla"},"*":{"quantity":749,"price":1800,"name":"Tata"}}]

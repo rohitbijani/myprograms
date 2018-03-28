@@ -19,18 +19,16 @@ public class UnorderedList {
 		String str=buf.readLine();
 		System.out.println(str);
 		String wordlist[]=str.split("\\s");
-		//System.out.println(wordlist[0]);
 		
 		for(int j=0; j<wordlist.length; j++)
 		{
-			list.addAtStart(wordlist[j]);
+			list.addAtEnd(wordlist[j]);
 		}
 		
 		System.out.println("Enter the word");
 		String word=Util.inputString();
 		boolean check=list.search(word);
 		
-		FileWriter fw=new FileWriter("/home/bridgeit/workspace/Rohit/Files/unordered.txt");
 
 		if(check==true)
 		{
@@ -40,10 +38,14 @@ public class UnorderedList {
 		else
 		{
 			System.out.println("word not found!");
-			list.addAtStart(word);
-		}
+			list.addAtEnd(word);
+		}	
 		
-		fw.write(list.toString());
+		//list.printList();
+		
+		FileWriter fw=new FileWriter("/home/bridgeit/workspace/Rohit/Files/wordlist.txt");
+
+		fw.write(list.listString());
 		fr.close();
 		fw.close();
 		}

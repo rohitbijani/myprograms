@@ -8,7 +8,7 @@ public class SearchAndSort {
 		new Util();
 		System.out.println("Enter the size of array");
 		int n=Util.inputInt();
-		int arr[]=new int[n];
+		Integer arr[]=new Integer[n];
 		String str[]=new String[n];
 		
 		System.out.println("Binary search for integer:");
@@ -22,10 +22,10 @@ public class SearchAndSort {
 		int pos=Util.binarySearchString(0,n-1,word,str);
 
 		System.out.println("insertion sort for integer");
-		Util.insertionSortInt(n, arr);
+		Util.insertionSort(n, arr);
 		
 		System.out.println("insertion sort for string");
-		Util.insertionSortString(n, str);
+		Util.insertionSort(n, str);
 		
 		System.out.println("bubble sort for integer");
 		Util.bubbleSortInt(n, arr);

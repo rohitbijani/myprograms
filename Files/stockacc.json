@@ -1,1 +1,9 @@
-[{"rohit":{"no. of shares":0,"balance":10000,"userid":"abc123"}},{"john":{"no. of shares":0,"balance":15000,"userid":"j123"}}]
+[
+	{
+		"rohit": {
+			"no. of shares": 0,
+			"balance": 255533,
+			"userid": "abc123"
+		}
+	}
+]

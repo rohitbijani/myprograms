@@ -15,7 +15,7 @@ public class MergeSort {
 		}
 		Util.mergeSort(0,n-1,arr);
 		System.out.println("Sorted array:");
-		Util.printArrayString(arr);
+		Util.printArray(arr);
 	}
 
 }

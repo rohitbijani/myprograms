@@ -393,23 +393,18 @@ public class Util {
 			
 			break;
 		
-		}
-		
-		
-        
-		
-		
+		}		
 		
 	}
 	
-public static void insertionSortInt(int n, int arr[]) {
+public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 		for(int i=1;i<n;i++)
 		{
-			int key=arr[i];
+			T key=arr[i];
 			int j=i-1;
 		
-			while(j>=0 && arr[j]>key)
+			while(j>=0 && arr[j].compareTo(key)>0)
 			{
 				arr[j+1]=arr[j];
 				j--;
@@ -417,7 +412,9 @@ public static void insertionSortInt(int n, int arr[]) {
 			arr[j+1]=key;
 		}
 }
-
+	
+	
+/*
 	public static void insertionSortString(int n, String arr[]) {
 		
 		for(int i=1;i<n;i++)
@@ -436,14 +433,14 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 	}
 
-	public static void bubbleSortInt(int n, int arr[]) {
+*/	public static <T extends Comparable<T>>void bubbleSort(int n, T arr[]) {
 		
-		int temp=0;
+		T temp;
 		for(int i=0;i<n-1;i++)
 		{
 			for(int j=0;j<n-1-i;j++)
 			{
-				if(arr[j]>arr[j+1])
+				if(arr[j].compareTo(arr[j+1])>0)
 				{
 					temp=arr[j+1];
 					arr[j+1]=arr[j];
@@ -453,7 +450,7 @@ public static void insertionSortInt(int n, int arr[]) {
 		}		
 	}
 
-	public static void bubbleSortString(int n, String arr[]) {
+	/*public static void bubbleSortString(int n, String arr[]) {
 		
 		String temp="";
 		for(int i=0;i<n-1;i++)
@@ -469,7 +466,7 @@ public static void insertionSortInt(int n, int arr[]) {
 			}
 		}		
 	}
-	
+	*/
 
 	public static boolean anagram(String s1, String s2) {
 		
@@ -690,7 +687,8 @@ public static void insertionSortInt(int n, int arr[]) {
 		System.out.println(c);
 	}
 
-	public static void printArrayInt(int[] arr) {
+	public static <T extends Comparable<T>> void printArray(T arr[]) {
+		
 		
 		for(int i=0;i<arr.length;i++)
 		{
@@ -700,14 +698,14 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 	}
 
-	public static void printArrayString(String[] arr) {
+/*	public static void printArrayString(String[] arr) {
 		
 		for(int i=0;i<arr.length;i++)
 		{
 			System.out.println(arr[i]);
 		}
 	}
-	
+*/	
 	public static void merge(int l, int m, int r, String arr[])	{
 		
 		int n1=m-l+1;
@@ -884,7 +882,7 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 	}
 
-	public static int binarySearchInt(int l, int h, int x, int[] arr) {
+	public static <T extends Comparable<T>> int binarySearchInt(int l, int h, int x, int[] arr) {
 		
 		if(l<=h)
 		{
@@ -897,10 +895,10 @@ public static void insertionSortInt(int n, int arr[]) {
 			
 			if(mid>x)
 			{
-				return binarySearchInt(l,mid-1,x,arr);
+				return binarySearch(l,mid-1,x,arr);
 			}
 			
-			return binarySearchInt(mid+1,h,x,arr);
+			return binarySearch(mid+1,h,x,arr);
 				
 		}
 		return -1;
@@ -1244,12 +1242,28 @@ public static void insertionSortInt(int n, int arr[]) {
 		
 	}
 	
-	public static Queue<String>[] calendarQueue(Queue<String>[] week) {
+	@SuppressWarnings("unchecked")
+	public static void calendarQueue(String[][] cal) {
 		
 		
 		
-		return week;
+		Queue<String>[] week = new Queue[7];
 		
+		for(int i=0; i<7; i++)
+		{
+			for(int j=0; j<6; j++)
+			{
+				week[i].enqueue(cal[j][i]);
+			}
+		}
+		
+		for(int i=0;i<7;i++)
+		{
+			for(int j=0;j<7;j++)
+			{
+				System.out.println(week[j].dequeue());
+			}
+		}
 		
 		
 	}
@@ -1349,11 +1363,6 @@ public static void insertionSortInt(int n, int arr[]) {
 		return jarr;
 		
 	}
-
-	
-
-	
-
 	
 }
 

@@ -29,7 +29,7 @@ public class LinkedList<T> {
 		Node<T> current=head;
 		while(current!=null)
 		{
-			if(current.getData() == val)
+			if(current.getData().equals(val))
 			{
 				return true;
 			}
@@ -83,16 +83,14 @@ public class LinkedList<T> {
 	public void remove(T val) {
 		
 		Node<T> current=head;
-		size--;
 		
-		while(current.getNext()!=null)
+		while(current!=null)
 		{
-			if(current.getData() == val)
+			if(current.getData().equals(val))
 			{
-				Node<T> temp=current.getNext();
-				temp=temp.getNext();
+				Node<T> temp=current.getNext().getNext();
 				current.setNext(temp);
-				
+				size--;
 				break;
 			}
 			
@@ -105,13 +103,15 @@ public class LinkedList<T> {
 		
 		if(head==null)
 		{
-			System.out.println("");
+			System.out.println("List is empty!!");
 		}
 		
-		T current=head.getData();
-		head=head.getNext();
-		
-		size--;
+		//T current=head.getData();
+		else
+		{
+			head=head.getNext();
+			size--;
+		}
 		
 	}
 	
@@ -124,7 +124,7 @@ public class LinkedList<T> {
 		{
 			for(j=head; j!=null; j=j.getNext())
 			{
-				if((int)(i.getData()) > (int)(j.getData()))
+				if((int)(i.getData()) < (int)(j.getData()))
 				{
 					temp=i.getData();
 					i.setData(j.getData());
@@ -146,6 +146,29 @@ public class LinkedList<T> {
 		}
 
 	}
-
 	
+	public void printList() {
+		
+		Node<T> current=head;
+		
+		while(current.getNext()!=null)
+		{
+			System.out.println(current.getData());
+			current=current.getNext();
+		}
+	}
+	
+	public String listString()
+	{
+		Node<T>current=head;
+		String result="";
+		while(current!=null)
+		{
+			result=result+" "+current.getData();
+			current=current.getNext();
+		}
+		
+		return result;
+		
+	}
 }

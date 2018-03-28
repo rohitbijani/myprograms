@@ -1,5 +1,7 @@
 package com.bridgelabz.DataStructure;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,14 +15,18 @@ public class OrderedList {
 		new Util();
 		LinkedList<Integer> list=new LinkedList<>();
 	
-		FileReader fr=new FileReader("/home/bridgeit/workspace/Rohit/Files/numbers.txt");
-		int i;
-		while((i=fr.read())!=-1)
+		FileReader fr=new FileReader("/home/bridgeit/workspace/Rohit/Files/number.txt");
+		BufferedReader bufferedReader=new BufferedReader(fr);
+		String line=bufferedReader.readLine();
+		
+		String numbers[]=line.split("\\s");
+		
+		for(int i=0;i<numbers.length;i++)
 		{
-			list.addAtStart(i);
+			list.addAtEnd(Integer.parseInt(numbers[i]));
 		}
 		
-		//System.out.println(list);
+		//System.out.println(list.getLastElement());
 		System.out.println("Enter the number");
 		int n=Util.inputInt();
 		boolean check=list.search(n);
@@ -33,14 +39,17 @@ public class OrderedList {
 		else
 		{
 			System.out.println("number not found!");
-			list.addAtStart(n);
+			list.addAtEnd(n);
 		}
 		
 		list.order();
-		FileWriter fw=new FileWriter("/home/bridgeit/workspace/Rohit/Files/ordered.txt");
-		fw.write(list.toString());
+		System.out.println("Ordered list:");
+		list.printList();
+		
+		FileWriter fw=new FileWriter("/home/bridgeit/workspace/Rohit/Files/number.txt");
+		
+		fw.write(list.listString());
 		fr.close();
-		fw.flush();
 		fw.close();
 
 	}

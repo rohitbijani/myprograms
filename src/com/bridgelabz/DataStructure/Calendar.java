@@ -4,6 +4,7 @@ import com.bridgelabz.Utility.Util;
 
 public class Calendar {
 
+	static String cal[][]=new String[6][7];
 	public static void main(String[] args) {
 		
 		new Util();
@@ -11,7 +12,7 @@ public class Calendar {
 		int year=Util.inputInt();
 		System.out.println("Enter 1 for Jan, 2 for Feb and so on...");
 		int month=Util.inputInt();
-		String cal[][]=new String[6][7];
+		
 		int[] days={31,28,31,30,31,30,31,31,30,31,30,31};
 		
 		boolean leap=Util.leapYear(year);
