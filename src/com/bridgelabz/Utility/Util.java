@@ -1,6 +1,5 @@
 package com.bridgelabz.Utility;
 
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -565,6 +564,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 	}
 
+	@SuppressWarnings("unused")
 	public static double stopwatch() {
 		
 		System.out.println("Press any key to start");
@@ -882,7 +882,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 	}
 
-	public static <T extends Comparable<T>> int binarySearchInt(int l, int h, int x, int[] arr) {
+	public static int binarySearchInt(int l, int h, int x, int[] arr) {
 		
 		if(l<=h)
 		{
@@ -895,10 +895,10 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 			
 			if(mid>x)
 			{
-				return binarySearch(l,mid-1,x,arr);
+				return binarySearchInt(l,mid-1,x,arr);
 			}
 			
-			return binarySearch(mid+1,h,x,arr);
+			return binarySearchInt(mid+1,h,x,arr);
 				
 		}
 		return -1;
@@ -1081,7 +1081,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 	}
 
-	public static void primeAnagram(int n) {
+	public static String[] primeAnagram(int n) {
 		
 		int k=2;
 		String str="";
@@ -1103,17 +1103,21 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		}
 		
 		String prime[]=str.split("\\s");
-		
+		String anagrams[]=new String[prime.length];
+		int pos=0;
 		for(int i=0; i<prime.length-1; i++)
 		{
 			for(int j=i+1; j<prime.length; j++)
 			{
 				if(anagram(prime[i], prime[j]))
 				{
-					System.out.println(prime[i]+" and "+prime[j]);
+					anagrams[pos]=prime[i]+" and "+prime[j];
+					pos++;
 				}
 			}
 		}
+		
+		return anagrams;
 				
 	}
 
@@ -1168,22 +1172,30 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 			if(c==2)
 			{			
 				arr[pos][range]=k;
-				pos++;
-				
-				if(k%100==0)
-					range++;
+				pos++;				
 			}
-									
+					
 			k++;
+			
+			if(k%100==0)
+			{
+				pos=0;
+				range++;
+			}
 		}
+		
+		System.out.println("0-100 101-200 201-300 301-400 401-500 501-600 601-700 701-800 801-900 901-1000");
+		System.out.println();
 		
 		for(int i=0; i<100; i++)
 		{
 			for(int j=0; j<n/100; j++)
 			{
-				System.out.println(arr[i][j]);
+				if(arr[i][j]!=0)
+					System.out.print(arr[i][j]+"\t");
 		
 			}
+			System.out.println("\n");
 		}
 		
 		
@@ -1235,7 +1247,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 			{
 				if(cal[i][j]==null)
 				{
-					cal[i][j]="";
+					cal[i][j]=" ";
 				}	
 			}
 		}
@@ -1362,6 +1374,67 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 		return jarr;
 		
+	}
+
+	public static void shuffleCards(String[][] cards) {
+		
+		Random r=new Random();
+		int x,y;
+		
+		for(int i=0; i<4; i++)
+		{
+			for(int j=0; j<13; j++)
+			{
+				x=r.nextInt(4);
+				y=r.nextInt(13);
+				String temp=cards[x][y];
+				cards[x][y]=cards[i][j];
+				cards[i][j]=temp;
+				
+			}
+		}
+	}
+
+	public static String[][] distributeCards(int n, int m, String[][] cards) {
+		
+		String players[][]=new String[n][m];
+		int k=0; int l=0;
+		for(int i=0; i<4; i++)
+		{
+			for(int j=0; j<9; j++)
+			{
+				players[i][j]=cards[k][l];
+				l++;
+				
+				if(l==12)
+				{
+					k++;
+					l=0;
+				}
+			}
+		}
+		
+		return players;
+	}
+
+	public static Queue<String> queueOfCards(String[][] players, int player) {
+		
+		String arr[]=new String[9];
+		
+		for(int i=0; i<arr.length; i++)
+		{
+			arr[i]=players[player][i];
+		}
+		
+		bubbleSort(9, arr);
+		
+		Queue<String> rankQueue=new Queue<>(9);
+		for(int i=0; i<arr.length; i++)
+		{
+			rankQueue.enqueue(arr[i]);
+		}
+		
+		return rankQueue;
 	}
 	
 }

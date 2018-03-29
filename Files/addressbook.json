@@ -1,1 +1,30 @@
-[{"zip":400070,"last name":"t","address":"chembur","first name":"imran","phone number":879020225},{"zip":400087,"last name":"bhagat","address":"khar","first name":"swapnil","phone number":798890293},{"zip":400905,"last name":"bijani","address":"Thane","first name":"rohit","phone number":783930325},{"zip":400134,"last name":"nayak","address":"kalyan","first name":"ganesh","phone number":963743235}]
+[
+	{
+		"zip": 400070,
+		"last name": "t",
+		"address": "chembur",
+		"first name": "imran",
+		"phone number": 879020225
+	},
+	{
+		"zip": 400087,
+		"last name": "bhagat",
+		"address": "khar",
+		"first name": "swapnil",
+		"phone number": 798890293
+	},
+	{
+		"zip": 400905,
+		"last name": "bijani",
+		"address": "Thane",
+		"first name": "rohit",
+		"phone number": 783930325
+	},
+	{
+		"zip": 400134,
+		"last name": "nayak",
+		"address": "kalyan",
+		"first name": "ganesh",
+		"phone number": 963743235
+	}
+]

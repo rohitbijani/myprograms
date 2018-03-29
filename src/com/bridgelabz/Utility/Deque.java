@@ -93,7 +93,7 @@ public class Deque<T> {
 		if(!isEmpty())
 		{
 			T x=peek();
-			deque.removeAtFirst(x);
+			deque.removeAtFirst();
 			rear++;
 			
 			return x;

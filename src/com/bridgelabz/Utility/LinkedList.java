@@ -45,7 +45,6 @@ public class LinkedList<T> {
 	public void addAtStart(T val)
 	{
 		Node<T> newNode=new Node<T>(val);
-		size++;
 		
 		if(head==null)
 		{
@@ -61,7 +60,6 @@ public class LinkedList<T> {
 	public void addAtEnd(T val)
 	{
 		Node<T> newNode=new Node<T>(val);
-		size++;
 		
 		if(head==null)
 		{
@@ -83,15 +81,22 @@ public class LinkedList<T> {
 	public void remove(T val) {
 		
 		Node<T> current=head;
+		Node<T> previous=null;
 		
 		while(current!=null)
 		{
 			if(current.getData().equals(val))
 			{
-				Node<T> temp=current.getNext().getNext();
-				current.setNext(temp);
-				size--;
-				break;
+				if (current == head) {
+	                head = head.getNext();
+	            }
+	            else {
+	                previous.setNext(current.getNext());
+	            }
+			}
+			else
+			{
+				previous=current;
 			}
 			
 			current=current.getNext();
@@ -99,7 +104,7 @@ public class LinkedList<T> {
 		
 	}
 	
-	public void removeAtFirst(T val) {
+	public void removeAtFirst() {
 		
 		if(head==null)
 		{
@@ -151,7 +156,7 @@ public class LinkedList<T> {
 		
 		Node<T> current=head;
 		
-		while(current.getNext()!=null)
+		while(current!=null)
 		{
 			System.out.println(current.getData());
 			current=current.getNext();
@@ -164,11 +169,24 @@ public class LinkedList<T> {
 		String result="";
 		while(current!=null)
 		{
-			result=result+" "+current.getData();
+			result=result+current.getData()+" ";
 			current=current.getNext();
 		}
 		
 		return result;
 		
 	}
+	
+	/*public static void main(String[] args) {
+		
+		LinkedList<String> list=new LinkedList<>();
+		list.addAtEnd("dhoni");
+		list.addAtEnd("virat");
+		list.addAtStart("bhuvi");
+		list.addAtStart("rohit");
+		//System.out.println(list.search("hello"));
+		//list.printList();
+		list.remove("bhuvi");
+		list.printList();
+	}*/
 }

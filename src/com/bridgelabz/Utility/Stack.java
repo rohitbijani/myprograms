@@ -61,7 +61,7 @@ public class Stack<T> {
 	{
 		if(!isFull())
 		{
-			stack.addAtEnd(element);
+			stack.addAtStart(element);
 			top++;
 			
 		}
@@ -90,5 +90,17 @@ public class Stack<T> {
 		}
 		
 	}
+	
+/*public static void main(String[] args) {
+	
+	Stack<String> stack=new Stack<>(1000);
+	stack.push("hello");
+	stack.push("how");
+	stack.push("you");
+	System.out.println(stack.peek());
+	System.out.println(stack.pop());
+	
+}
+*/		
 	
 }

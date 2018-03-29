@@ -224,7 +224,7 @@ public class AddressBook {
 			new Util();
 			AddressBook addbook=new AddressBook();
 			
-			System.out.println("Enter your choice\n1.Add\n2.Edit\n3.Delete\n4.Sort by name\n5.Sort by zip");
+			System.out.println("Enter your choice\n1.Add\n2.Edit\n3.Delete\n4.Sort by name\n5.Sort by zip\n6.Exit");
 			int ch=Util.inputInt();
 			switch(ch)
 			{
@@ -258,6 +258,10 @@ public class AddressBook {
 				
 				addbook.sortZip();
 				break;
+			
+			case 6:
+				
+				System.exit(0);
 				
 			}
 			

@@ -1,14 +1,14 @@
-package com.bridgelabz.Algorithm;
+package com.bridgelabz.DataStructure;
 
 import com.bridgelabz.Utility.Util;
 
-public class PrimeAnagram {
-
+public class PrimeAnagramArray {
 	public static void main(String[] args) {
 		
 		new Util();
-		int n=1000;
-		System.out.println("Prime anagrams are:");
+		System.out.println("Enter range 0 to:");
+		int n=Util.inputInt();
+		System.out.println("---PRIME ANAGRAMS---");
 		String anagrams[]=Util.primeAnagram(n);
 		
 		for(int i=0; i<anagrams.length; i++)

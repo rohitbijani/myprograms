@@ -78,7 +78,7 @@ public class Queue<T> {
 		if(!isEmpty())
 		{
 			T x=peek();
-			queue.removeAtFirst(x);
+			queue.removeAtFirst();
 			rear++;
 			
 			return x;
@@ -91,5 +91,19 @@ public class Queue<T> {
 		}
 		
 	}
-
+	
+/*public static void main(String[] args) {
+		
+		Queue<String> list=new Queue<>(5);
+		list.enqueue("dhoni");
+		list.enqueue("virat");
+		list.enqueue("bhuvi");
+		list.enqueue("rohit");
+		//System.out.println(list.search("hello"));
+		//list.printList();
+		for(int i=1; i<list.size();i++)
+		System.out.println(list.dequeue());
+		//list.printList();
+	}
+*/
 }

@@ -28,10 +28,10 @@ public class SearchAndSort {
 		Util.insertionSort(n, str);
 		
 		System.out.println("bubble sort for integer");
-		Util.bubbleSortInt(n, arr);
+		Util.bubbleSort(n, arr);
 		
 		System.out.println("bubble sort for string");
-		Util.bubbleSortString(n, str);
+		Util.bubbleSort(n, str);
 		
 	}
 

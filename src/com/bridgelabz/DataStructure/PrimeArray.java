@@ -6,8 +6,11 @@ public class PrimeArray {
 	public static void main(String[] args) {
 		
 		new Util();
-		int n=1000;
+		System.out.println("Enter range 0 to:");
+		int n=Util.inputInt();
+		System.out.println("---PRIME NUMBERS---");
 		Util.PrimeArray(n);	
-	
+		
+		
 	}
 }
