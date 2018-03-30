@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Purpose: To find the value of nth Harmonic.
+ *
+ *  @author  Rohit Bijani
+ *  @version 1.0
+ *  @since   12-03-2018
+ *
+ ******************************************************************************/
 package com.bridgelabz.Functional;
 
 import com.bridgelabz.Utility.Util;

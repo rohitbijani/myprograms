@@ -777,33 +777,38 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 
 	public static void findNumber(int l, int h) {
 		
-		int m=0;
+		
 		String str="";
 		
 		if(l<h)
 		{
+			int m=(h+l)/2;
 			
-			System.out.println("Is no. between "+l+" and "+h);
+			System.out.println("Is no. between "+l+" and "+m);
 			str=Util.inputString();
 			
 			if(str=="true")
 			{
-				m=(h+l)/2;
-				h=m;				
+				h=m;		
 				findNumber(l, h);
 				
 			}
 			else
 			{
-				m=(h+l)/2;
+				//System.out.println("Is no. between "+ (m+1) +" and "+ h);
+				//str=Util.inputString();
+				
 				l=m+1;
 				findNumber(l, h);
 				
 			}
 			
+			if(l==h)
+				System.out.println(m);
+			
 		}
 		
-		System.out.println(m);
+		
 		
 		
 		
@@ -882,7 +887,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 	}
 
-	public static int binarySearchInt(int l, int h, int x, int[] arr) {
+	public static int binarySearchInt(int l, int h, int x, Integer[] arr) {
 		
 		if(l<=h)
 		{
@@ -1257,9 +1262,12 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 	@SuppressWarnings("unchecked")
 	public static void calendarQueue(String[][] cal) {
 		
-		
-		
 		Queue<String>[] week = new Queue[7];
+		
+		for(int i=0; i<7; i++)
+		{
+			week[i]=new Queue<>(6);
+		}
 		
 		for(int i=0; i<7; i++)
 		{
@@ -1267,15 +1275,52 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 			{
 				week[i].enqueue(cal[j][i]);
 			}
+		}	
+		
+		System.out.println("S\tM\tT\tW\tT\tF\tS");
+
+		for(int i=0; i<6; i++)
+		{
+			for(int j=0; j<7; j++)
+			{
+				System.out.print(week[j].dequeue()+"\t");
+			}
+			System.out.println();
 		}
 		
-		for(int i=0;i<7;i++)
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void calendarStack(String[][] cal) {
+		
+		Stack<String>[] week= new Stack[7];
+		
+		for(int i=0; i<7; i++)
 		{
-			for(int j=0;j<7;j++)
+			week[i]=new Stack<>(6);
+		}
+		
+		for(int i=0; i<7; i++)
+		{
+			for(int j=5; j>=0; j--)
 			{
-				System.out.println(week[j].dequeue());
+				week[i].push(cal[j][i]);
 			}
 		}
+		
+		System.out.println("S\tM\tT\tW\tT\tF\tS");
+		
+		for(int i=0; i<6; i++)
+		{
+			for(int j=0; j<7; j++)
+			{
+				if(week[j].peek()!=null)
+					System.out.print(week[j].pop()+"\t");
+			}
+			System.out.println();
+		}
+
 		
 		
 	}
@@ -1436,6 +1481,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 		return rankQueue;
 	}
+
 	
 }
 

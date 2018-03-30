@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Purpose: To Read a string from a file and find if a particular Strings exists.
+ *
+ *  @author  Rohit Bijani
+ *  @version 1.0
+ *  @since   14-03-2018
+ *
+ ******************************************************************************/
 package com.bridgelabz.Algorithm;
 
 import java.io.*;
@@ -10,7 +18,6 @@ public class BinarySearch {
 		
 		FileReader in=new FileReader("/home/bridgeit/workspace/Rohit/Files/wordlist.txt");
 		BufferedReader reader = new BufferedReader(in);
-		//StringBuilder sb = new StringBuilder();
 		
 		String line = reader.readLine();
 		
@@ -26,6 +33,7 @@ public class BinarySearch {
 		else
 			System.out.println("found at "+n);
 		
+		reader.close();
 
 	}
 

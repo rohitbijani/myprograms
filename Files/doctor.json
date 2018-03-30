@@ -1,0 +1,23 @@
+[
+	{
+		"name": "sameer",
+		"specialization": "physio",
+		"ID": "12203",
+		"patient's count": 0,
+		"availability": "am"
+	},
+	{
+		"name": "fernandes",
+		"specialization": "ent",
+		"ID": "8922",
+		"patient's count": 0,
+		"availability": "pm"
+	},
+	{
+		"name": "chauhan",
+		"specialization": "surgeon",
+		"ID": "20933",
+		"patient's count": 0,
+		"availability": "pm"
+	}
+]

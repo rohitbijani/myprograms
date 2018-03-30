@@ -35,6 +35,12 @@ public class Calendar {
 			System.out.println();
 		}
 		
+		System.out.println("----CALENDAR QUEUE----");
+		Util.calendarQueue(cal);	
+		
+		System.out.println("----CALENDAR STACK----");
+		Util.calendarStack(cal);
+		
 	}
 
 }

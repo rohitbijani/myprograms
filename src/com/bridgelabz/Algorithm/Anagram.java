@@ -1,3 +1,12 @@
+/******************************************************************************
+ *  Purpose: To check if the String is anagram or not.
+ *
+ *  @author  Rohit Bijani
+ *  @version 1.0
+ *  @since   12-03-2018
+ *
+ ******************************************************************************/
+
 package com.bridgelabz.Algorithm;
 
 import com.bridgelabz.Utility.Util;

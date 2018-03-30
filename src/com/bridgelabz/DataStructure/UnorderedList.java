@@ -1,3 +1,13 @@
+/******************************************************************************
+ *  Purpose: Reads String from files and Removes the word if it is
+ *  		 present in the file or Add if it is not.
+ *
+ *  @author  Rohit Bijani
+ *  @version 1.0
+ *  @since   19-03-2018
+ *
+ ******************************************************************************/
+
 package com.bridgelabz.DataStructure;
 
 import java.io.BufferedReader;

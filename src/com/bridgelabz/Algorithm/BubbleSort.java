@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Purpose: To implement bubble sort.
+ *
+ *  @author  Rohit Bijani
+ *  @version 1.0
+ *  @since   13-03-2018
+ *
+ ******************************************************************************/
 package com.bridgelabz.Algorithm;
 
 import com.bridgelabz.Utility.Util;
