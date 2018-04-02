@@ -1,14 +1,1 @@
-[
-	{
-		"phone": 9847230955,
-		"name": "rohit",
-		"ID": "tx235",
-		"age": 22
-	},
-	{
-		"phone": 903287834,
-		"name": "sunita",
-		"ID": "5628",
-		"age": 30
-	}
-]
+[{"phone":9847230955,"name":"rohit","ID":"tx235","age":22},{"phone":903287834,"name":"sunita","ID":"5628","age":30},{"phone":98763452,"name":"john","ID":"j244","age":34},{"phone":0,"name":null,"ID":null,"age":0}]

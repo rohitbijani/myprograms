@@ -160,14 +160,14 @@ public class AddressBook {
 		Util.bubbleSort(len, names);
 		
 		JSONArray newarr=new JSONArray();
-		for(int i=0; i<userArray.size(); i++)
-		{
-			JSONObject obj= (JSONObject) userArray.get(i);
-			
-			for(int j=0; j<len; j++)
+		for(int i=0; i<names.length; i++)
+		{			
+			for(int j=0; j<userArray.size(); j++)
 			{
-				if(names[j].equals(obj.get("first name")))
+				JSONObject obj= (JSONObject) userArray.get(j);
+				if(names[i].equals(obj.get("first name")))
 				{
+					
 					newarr.add(obj);
 				}
 			}
@@ -196,14 +196,12 @@ public class AddressBook {
 			Util.bubbleSort(len, zip);
 			
 			JSONArray newarr=new JSONArray();
-			for(int i=0; i<len; i++)
-			{
-				JSONObject obj= (JSONObject) userArray.get(i);
-				
-				for(int j=0; j<len; j++)
+			for(int i=0; i<zip.length; i++)
+			{			
+				for(int j=0; j<userArray.size(); j++)
 				{
-
-					if(zip[j].equals((Long)obj.get("zip")))
+					JSONObject obj= (JSONObject) userArray.get(j);
+					if(zip[i].equals(obj.get("zip")))
 					{
 						newarr.add(obj);
 					}

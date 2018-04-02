@@ -446,7 +446,9 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 					arr[j]=temp;
 				}
 			}
-		}		
+		}
+		
+		
 	}
 
 	/*public static void bubbleSortString(int n, String arr[]) {
@@ -777,41 +779,30 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 
 	public static void findNumber(int l, int h) {
 		
+		int m=(h+l)/2;
 		
-		String str="";
+		System.out.println("Is your number "+ m);
+		System.out.println("Press... \n1. number is less than " + m);
+		System.out.println("2. number is greater than " + m);
+		System.out.println("3. CORRECT!");
+		int ch=Util.inputInt();
 		
-		if(l<h)
-		{
-			int m=(h+l)/2;
-			
-			System.out.println("Is no. between "+l+" and "+m);
-			str=Util.inputString();
-			
-			if(str=="true")
-			{
-				h=m;		
-				findNumber(l, h);
-				
-			}
-			else
-			{
-				//System.out.println("Is no. between "+ (m+1) +" and "+ h);
-				//str=Util.inputString();
-				
-				l=m+1;
-				findNumber(l, h);
-				
-			}
-			
-			if(l==h)
-				System.out.println(m);
+		if(ch==1)
+		{		
+			findNumber(l, m);
 			
 		}
-		
-		
-		
-		
-		
+		if(ch==2)
+		{				
+			
+			findNumber(m+1, h);
+			
+		}
+		if(ch==3)
+		{
+			System.out.println("---");
+		}
+			
 	}
 
 	public static void prime(int n) {
@@ -1444,9 +1435,9 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		
 		String players[][]=new String[n][m];
 		int k=0; int l=0;
-		for(int i=0; i<4; i++)
+		for(int i=0; i<n; i++)
 		{
-			for(int j=0; j<9; j++)
+			for(int j=0; j<m; j++)
 			{
 				players[i][j]=cards[k][l];
 				l++;

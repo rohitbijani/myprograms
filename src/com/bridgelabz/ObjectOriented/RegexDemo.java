@@ -18,7 +18,7 @@ public class RegexDemo {
 		Pattern r2 = Pattern.compile(regexNumber);
 		Pattern r3 = Pattern.compile(regexDate);
 
-		System.out.println(msg);
+		//System.out.println(msg);
 		System.out.println("Enter fullname");
 		String name=Util.inputStringLine();
 		System.out.println("Enter phone no.");

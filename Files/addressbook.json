@@ -1,5 +1,12 @@
 [
 	{
+		"zip": 400023,
+		"last name": "k",
+		"address": "kalyan",
+		"first name": "ganesh",
+		"phone number": 983682456
+	},
+	{
 		"zip": 400070,
 		"last name": "t",
 		"address": "chembur",
@@ -21,10 +28,10 @@
 		"phone number": 783930325
 	},
 	{
-		"zip": 400134,
-		"last name": "nayak",
-		"address": "kalyan",
-		"first name": "ganesh",
-		"phone number": 963743235
+		"zip": 408224,
+		"last name": "dsousa",
+		"address": "vashi",
+		"first name": "sam",
+		"phone number": 96930384
 	}
 ]

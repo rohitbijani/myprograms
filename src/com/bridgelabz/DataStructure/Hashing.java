@@ -58,7 +58,7 @@ public class Hashing {
 		{
 			if(n==numbers[i])
 			{
-				list[n%11].remove(n);
+				list[n%11].removeFirstOccurrence(n);
 				flag=true;
 				break;
 			}
@@ -78,7 +78,7 @@ public class Hashing {
 
 		for(int k=0; k<11; k++)
 		{
-			System.out.println(hash.get(k));
+			System.out.println(k+" --> "+hash.get(k));
 		}
 
 		FileWriter fileWriter=new FileWriter("/home/bridgeit/workspace/Rohit/Files/hashing.txt");

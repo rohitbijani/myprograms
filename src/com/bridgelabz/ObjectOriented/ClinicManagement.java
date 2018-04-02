@@ -321,57 +321,100 @@ public class ClinicManagement {
 		docname=Util.inputString();
 		Date date=new Date();
 		
+		boolean b=false;
 		for(int i=0; i<doctorArray.size(); i++)
 		{
 			JSONObject obj= (JSONObject) doctorArray.get(i);
 
 			if(obj.get("name").equals(docname))
 			{
-				count= (long) obj.get("patient's count");
-				if(count<5)
+				System.out.println("Enter patient's name");
+				name=Util.inputString();
+				boolean flag=false;
+				
+				for(int j=0; j<patientArray.size(); j++)
 				{
-					System.out.println("Enter patient's name");
-					name=Util.inputString();
-					book.put("Doctor's name", docname);
-					book.put("Patient's name", name);
-					book.put("Time", date.toString());
+					JSONObject newobj= (JSONObject) patientArray.get(j);
 					
-					appointArray.add(book);
-					System.out.println("Appointment confirmed for "+date);
-					
-					fileWriter=new FileWriter(appointFile);
-					fileWriter.write(appointArray.toJSONString());
-					fileWriter.close();
-					
-				}
-				else
-				{
-					System.out.println("Enter patient's name");
-					name=Util.inputString();
-					avail=(String) obj.get("availability");
-					
-					Calendar c = Calendar.getInstance();
-					c.setTime(date);
-					c.add(Calendar.DATE, 1);  
-					date = c.getTime();
-					
-					System.out.println("Doctor unavailable currently....\nFixing appointment for "+date);
-					book.put("Doctor's name", docname);
-					book.put("Patient's name", name);
-					book.put("Time", date.toString());
-					
-					appointArray.add(book);
-					fileWriter=new FileWriter(appointFile);
-					fileWriter.write(appointArray.toJSONString());
-					fileWriter.close();
-					
+					if(newobj.get("name").equals(name))
+					{
+						flag=true;
+						break;
+					}
+
 				}
 				
+				if(flag==true)
+				{
+					count= (long) obj.get("patient's count");
+					if(count<5)
+					{
+						book.put("Doctor's name", docname);
+						book.put("Patient's name", name);
+						book.put("Time", date.toString());
+						appointArray.add(book);
+						System.out.println("Appointment confirmed for "+date);
+						
+						count++;
+						obj.put("patient's count", count);
+						doctorArray.set(i, obj);
+						
+						fileWriter=new FileWriter(appointFile);
+						fileWriter.write(appointArray.toJSONString());
+						fileWriter.flush();
+						fileWriter=new FileWriter(doctorFile);
+						fileWriter.write(doctorArray.toJSONString());
+						fileWriter.close();
+						
+					}
+					else
+					{
+						System.out.println("Enter patient's name");
+						name=Util.inputString();
+						avail=(String) obj.get("availability");
+						
+						Calendar c = Calendar.getInstance();
+						c.setTime(date);
+						c.add(Calendar.DATE, 1);  
+						date = c.getTime();
+						
+						System.out.println("Doctor unavailable currently....\nFixing appointment for "+date);
+						book.put("Doctor's name", docname);
+						book.put("Patient's name", name);
+						book.put("Time", date.toString());
+						appointArray.add(book);
+						
+						count++;
+						obj.put("patient's count", count);
+						doctorArray.set(i, obj);
+						
+						
+						fileWriter=new FileWriter(appointFile);
+						fileWriter.write(appointArray.toJSONString());
+						fileWriter.flush();
+						fileWriter=new FileWriter(doctorFile);
+						fileWriter.write(doctorArray.toJSONString());
+						fileWriter.close();
+						
+					}
+				}
+				
+				else
+				{
+					System.out.println("Patient doesn't exists!!\nAdding new patient...");
+					new ClinicManagement().addPatient();
+				}
+				
+				b=true;	
 				break;
 			}
-			
 		}
 		
+		if(b==false)
+		{
+			System.out.println("Doctor doesn't exist!!");
+		}
+			
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {

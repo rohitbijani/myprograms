@@ -27,48 +27,50 @@ public class SearchAndSort {
 		for(int i=0; i<n; i++)
 			str[i]=Util.inputString();
 		
+		
+		System.out.println("Enter the word to be searched");
+		String word=Util.inputString();		
+		System.out.println("Enter the integer to be searched");
+		int x=Util.inputInt();		
+		
 		System.out.println("----insertion sort for integer----");
 		long t1=System.currentTimeMillis();
 		Util.insertionSort(n, arr);
-		long et1=System.currentTimeMillis()-t1;
+		long et1=System.currentTimeMillis();
 		
 		System.out.println("----insertion sort for string----");
 		long t2=System.currentTimeMillis();
 		Util.insertionSort(n, str);
-		long et2=System.currentTimeMillis()-t2;
+		long et2=System.currentTimeMillis();
 		
 		System.out.println("----bubble sort for integer----");
 		long t3=System.currentTimeMillis();
 		Util.bubbleSort(n, arr);
-		long et3=System.currentTimeMillis()-t3;
+		long et3=System.currentTimeMillis();
 
 		System.out.println("----bubble sort for string----");
 		long t4=System.currentTimeMillis();
 		Util.bubbleSort(n, str);
-		long et4=System.currentTimeMillis()-t4;
+		long et4=System.currentTimeMillis();
 		
 		System.out.println("----Binary search for integer----");
-		System.out.println("Enter the integer to be searched");
-		int x=Util.inputInt();		
 		long t5=System.currentTimeMillis();
 		int pos1=Util.binarySearchInt(0,n-1,x,arr);
-		long et5=System.currentTimeMillis()-t5;
+		long et5=System.currentTimeMillis();
 		System.out.println("position: "+pos1);
 		
 		System.out.println("----Binary search for string----");
-		System.out.println("Enter the word to be searched");
-		String word=Util.inputString();		
 		long t6=System.currentTimeMillis();
 		int pos=Util.binarySearchString(0,n-1,word,str);
-		long et6=System.currentTimeMillis()-t6;
+		long et6=System.currentTimeMillis();
 		System.out.println("position: "+pos);
 		
-		System.out.println("Elapsed time for...\ninteger insertion sort: "+et1);
-		System.out.println("string insertion sort: "+et2);
-		System.out.println("integer bubble sort: "+et3);
-		System.out.println("string bubble sort: "+et4);
-		System.out.println("integer binary search: "+et5);
-		System.out.println("string binary search: "+et6);
+		System.out.println("Elapsed time for...\ninteger insertion sort: "+ (et1-t1));
+		System.out.println("string insertion sort: "+ (et2-t2));
+		System.out.println("integer bubble sort: "+(et3-t3));
+		System.out.println("string bubble sort: "+(et4-t4));
+		System.out.println("integer binary search: "+(et5-t5));
+		System.out.println("string binary search: "+(et6-t6));
 
 
 	}

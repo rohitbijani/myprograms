@@ -9,7 +9,7 @@ public class Palindrome {
 		
 		new Util();
 		System.out.println("Enter the string");
-		String word=Util.inputString();
+		String word=Util.inputString().toLowerCase();
 		int len=word.length();
 		Deque<Character> deque=new Deque<>(len);
 			
