@@ -22,11 +22,12 @@ public class CashCounter {
 			queue.enqueue(name);
 		}
 		
-		System.out.println("BANK");
+		System.out.println("----BANK----");
 		while(!queue.isEmpty())
 		{
 			System.out.println("Welcome "+ queue.peek());
-			System.out.println("Select\n1.Deposit\n2.Withdraw");
+			System.out.println("Current balance: "+ bal);
+			System.out.println("Select:\t1.Deposit\t2.Withdraw");
 			int ch=Util.inputInt();			
 			System.out.println("Enter the amount:");
 			

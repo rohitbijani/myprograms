@@ -8,17 +8,17 @@ public class PrototypeTest {
 		Employees emps = new Employees();
 		emps.loadData();
 		
-		//Use the clone method to get the Employee object
+		//Used the clone method to get the Employee object
 		Employees empsNew = (Employees) emps.clone();
 		Employees empsNew1 = (Employees) emps.clone();
 		List<String> list = empsNew.getEmpList();
-		list.add("John");
+		list.add("Frank");
 		List<String> list1 = empsNew1.getEmpList();
-		list1.remove("Pankaj");
+		list1.remove("Sam");
 		
-		System.out.println("emps List: "+emps.getEmpList());
-		System.out.println("empsNew List: "+list);
-		System.out.println("empsNew1 List: "+list1);
+		System.out.println("List: "+emps.getEmpList());
+		System.out.println("added Frank: "+list);
+		System.out.println("removed Sam: "+list1);
 	}
 
 }

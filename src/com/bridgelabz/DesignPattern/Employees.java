@@ -16,8 +16,8 @@ public class Employees implements Cloneable{
 	}
 	public void loadData(){
 		
-		empList.add("Pankaj");
-		empList.add("Raj");
+		empList.add("John");
+		empList.add("Sam");
 		empList.add("David");
 		empList.add("Lisa");
 	}
@@ -28,8 +28,10 @@ public class Employees implements Cloneable{
 
 	@Override
 	public Object clone() throws CloneNotSupportedException{
+		
 			List<String> temp = new ArrayList<String>();
-			for(String s : this.getEmpList()){
+			for(String s : this.getEmpList())
+			{
 				temp.add(s);
 			}
 			return new Employees(temp);
