@@ -91,15 +91,25 @@ public class StockAccount {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void buy(long numberOfShares, String symbol) throws IOException, ParseException
+	public void buy() throws IOException, ParseException
 	{
 		new StockAccount();
+		
+		System.out.println("---BUYING SHARES---");
+		login();
+		System.out.println("Enter share symbol");
+		String symbol=Util.inputString();
+		
 		JSONObject newobj = (JSONObject)companyArray.get(0);
 		JSONObject company = (JSONObject)newobj.get(symbol);
 		long price=(long)company.get("price");
 		long quantity=(long)company.get("quantity");
-		long amount=numberOfShares*price;
-	
+		System.out.println("Share info: "+company);
+		
+		System.out.println("Enter no. of shares");
+		long numberOfShares=Util.inputInt();
+		long amount=numberOfShares*price;	
+		
 		for(int i=0; i<userArray.size(); i++)
 		{
 			JSONObject obj= (JSONObject) userArray.get(i);
@@ -154,13 +164,23 @@ public class StockAccount {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void sell(long numberOfShares, String symbol) throws IOException, ParseException
+	public void sell() throws IOException, ParseException
 	{
 		new StockAccount();
+
+		System.out.println("---SELLING SHARES---");
+		login();
+		System.out.println("Enter share symbol");
+		String symbol=Util.inputString();
+		
 		JSONObject newobj = (JSONObject)companyArray.get(0);
 		JSONObject company = (JSONObject)newobj.get(symbol);
 		long price=(long)company.get("price");
 		long quantity=(long)company.get("quantity");
+		//System.out.println("User info: "+userArray.get(index));
+		
+		System.out.println("Enter no. of shares");
+		long numberOfShares=Util.inputInt();
 		long amount=numberOfShares*price;
 
 		for(int i=0; i<userArray.size(); i++)
@@ -174,7 +194,11 @@ public class StockAccount {
 				long balance=(long)user.get("balance");
 				long count=(long)user.get("no. of shares");
 				
-				if(numberOfShares>count)
+				if(count==0)
+				{
+					System.out.println("No shares available!");
+				}
+				else if(numberOfShares>count)
 				{
 					System.out.println("Cannot sell more than "+count+" shares!");
 				}
@@ -185,7 +209,7 @@ public class StockAccount {
 					user.put("balance", balance);
 					user.put("no. of shares", count);
 					obj.put(uname, user);
-					userArray.remove(0);
+					userArray.remove(i);
 					userArray.add(obj);
 					
 					quantity+=numberOfShares;
@@ -259,25 +283,13 @@ public class StockAccount {
 			
 		case 3:
 			
-			System.out.println("---BUYING SHARES---");
-			System.out.println("Enter share symbol");
-			String symbol=Util.inputString();
-			System.out.println("Enter no. of shares");
-			int n=Util.inputInt();
-			
-			stock.buy(n,symbol);
+			stock.buy();
 			System.out.println();
 			break;
 			
 		case 4:
 			
-			System.out.println("---SELLING SHARES---");
-			System.out.println("Enter share symbol");
-			String symbol1=Util.inputString();
-			System.out.println("Enter no. of shares");
-			int n1=Util.inputInt();
-			
-			stock.sell(n1,symbol1);
+			stock.sell();
 			System.out.println();
 			break;
 			

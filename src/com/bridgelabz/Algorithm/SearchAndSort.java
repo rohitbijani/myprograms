@@ -32,7 +32,7 @@ public class SearchAndSort {
 		String word=Util.inputString();		
 		System.out.println("Enter the integer to be searched");
 		int x=Util.inputInt();		
-		
+		System.out.println("Running.....");
 		System.out.println("----insertion sort for integer----");
 		long t1=System.currentTimeMillis();
 		Util.insertionSort(n, arr);
@@ -65,6 +65,7 @@ public class SearchAndSort {
 		long et6=System.currentTimeMillis();
 		System.out.println("position: "+pos);
 		
+		System.out.println();
 		System.out.println("Elapsed time for...\ninteger insertion sort: "+ (et1-t1));
 		System.out.println("string insertion sort: "+ (et2-t2));
 		System.out.println("integer bubble sort: "+(et3-t3));

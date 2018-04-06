@@ -12,7 +12,7 @@ public class RegexDemo {
 		String msg="Hello <<name>>, We have your full name as <<full name>> in our system. your contact number is 91­xxxxxxxxxx. Please,let us know in case of any clarification Thank you BridgeLabz 01/01/2016.";
 		String regexString="^[a-zA-Z\\s]*$";
 		String regexNumber="^\\d{10}+$";
-		String regexDate="([0-9]{2})/([0-9]{2})/([0-9]{4})";
+		String regexDate="([0-9]+)[/-]{1}([0-9]+)[/-]{1}([0-9]+)";
 		
 		Pattern r1 = Pattern.compile(regexString);
 		Pattern r2 = Pattern.compile(regexNumber);

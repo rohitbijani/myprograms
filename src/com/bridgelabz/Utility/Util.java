@@ -800,7 +800,7 @@ public static  <T extends Comparable<T>>void insertionSort(int n, T arr[]) {
 		}
 		if(ch==3)
 		{
-			System.out.println("---");
+			System.out.println("Number found!!\nYour number: " + m);
 		}
 			
 	}
