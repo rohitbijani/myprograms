@@ -9,6 +9,7 @@ public class ReflectionSingletonTest {
         BillPughSingleton instanceTwo = null;
         try {
             Constructor[] constructors = BillPughSingleton.class.getDeclaredConstructors();
+            //Method[] methods = BillPughSingleton.class.getDeclaredMethods();
             for (Constructor constructor : constructors) {
                 //Below code will destroy the singleton pattern
                 constructor.setAccessible(true);

@@ -1,6 +1,16 @@
 package com.bridgelabz.DesignPattern;
 
 public class BillPughSingleton {
+	
+	/* enum EnumSingleton {
+
+		    INSTANCE;
+		    
+		    public static void doSomething(){
+		        //do something
+		    }
+	 }
+*/
 private BillPughSingleton(){}
     
     private static class SingletonHelper{

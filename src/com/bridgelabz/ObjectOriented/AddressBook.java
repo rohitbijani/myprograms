@@ -1,95 +1,98 @@
 package com.bridgelabz.ObjectOriented;
 
+import com.bridgelabz.Utility.Util;
+
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.bridgelabz.Utility.Util;
-
 public class AddressBook {
 	
-	String fname,lname,address; long zip,phone;
-	String userFile="/home/bridgeit/workspace/Rohit/Files/addressbook.json";
+	AddressBook addressBook; Person person;
+	String fname,lname,state,city; int zip; long phone; Address address;
+	String personFile="/home/bridgeit/workspace/Rohit/Files/addressbook.json";
+	FileWriter fileWriter; FileReader fileReader; BufferedReader reader;
 	JSONParser parser=new JSONParser();	
-	JSONArray userArray;
-	FileWriter fileWriter; FileReader fileReader;
+	List<Person> personList=new ArrayList<>(); 
+	List<Person> sortedNames=new ArrayList<>();
+	List<Person> sortedZip=new ArrayList<>();
+	ObjectMapper mapper; String jsonString; 
 	
-	public AddressBook() throws FileNotFoundException, IOException, ParseException {
+	/*public AddressBook() throws FileNotFoundException, IOException, ParseException {
 		
-		userArray= (JSONArray) parser.parse(new FileReader(userFile));
+		//	jsonString =  new FileReader(personFile).toString();
+		person = mapper.readValue(new FileReader(personFile), Person.class);			
+			
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void add() throws IOException {
+	*/
+	public void add() throws IOException, ParseException {
 		
-		JSONObject obj=new JSONObject();
-		
+		new AddressBook();
 		System.out.println("Enter first name");
 		fname=Util.inputString();
 		System.out.println("Enter last name");
 		lname=Util.inputString();
-		System.out.println("Enter zip");
-		long zip=Util.inputLong();
-		System.out.println("Enter address");
-		String address=Util.inputString();
-		System.out.println("Enter phone no.");
-		long phone=Util.inputLong();
-
-		obj.put("first name",fname);
-		obj.put("last name", lname);
-		obj.put("zip", zip);
-		obj.put("address", address);
-		obj.put("phone number", phone);
-		userArray.add(obj);
 		
-		fileWriter=new FileWriter(userFile);
-		fileWriter.write(userArray.toJSONString());
-		fileWriter.close();
+		person=new Person(fname, lname);
+		
+		System.out.println("Enter address...");
+		System.out.println("Enter state");
+		state=Util.inputString();
+		System.out.println("Enter city");
+		city=Util.inputString();
+		System.out.println("Enter zip");
+		zip=Util.inputInt();
+		System.out.println("Enter phone no.");
+		phone=Util.inputLong();
+		
+		person.setPhone(phone);
+		person.setAddress(state, city, zip);
+		personList.add(person);
+		
+	    //mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		mapper=new ObjectMapper();
+		mapper.writeValue(new File(personFile), personList);
+		
+		//fileWriter.write(mapper.toString());
 		
 	}
 	
-	
-	@SuppressWarnings("unchecked")
-	public void edit() throws FileNotFoundException, IOException, ParseException{
+	public void edit() throws IOException, ParseException {
 		
 		new AddressBook();
 		System.out.println("Enter first name");
 		fname = Util.inputString();
 		
 		boolean flag=false;
-		for(int i=0; i<userArray.size(); i++)
+		for (Person obj : personList) 
 		{
-			JSONObject obj= (JSONObject) userArray.get(i);
-			System.out.println(obj);
-	
-			if(obj.get("first name").equals(fname))
+			if(obj.getFname().equals(fname))
 			{
 				System.out.println("Enter last name");
 				lname=Util.inputString();
+				System.out.println("Enter address...");
+				System.out.println("Enter state");
+				state=Util.inputString();
+				System.out.println("Enter city");
+				city=Util.inputString();
 				System.out.println("Enter zip");
-				zip=Util.inputLong();
-				System.out.println("Enter address");
-				address=Util.inputString();
+				zip=Util.inputInt();
 				System.out.println("Enter phone no.");
 				phone=Util.inputLong();
 				
-				obj.put("first name", fname);
-				obj.put("last name", lname);
-				obj.put("zip",zip);
-				obj.put("address", address);
-				obj.put("phone number", phone);
-				userArray.remove(i);
-				userArray.add(obj);
-				
-				fileWriter=new FileWriter(userFile);
-				fileWriter.write(userArray.toJSONString());
-				fileWriter.close();
+				obj.setLname(lname);
+				obj.setPhone(phone);
+				obj.setAddress(state, city, zip);
 				
 				flag=true;
 				break;
@@ -106,27 +109,19 @@ public class AddressBook {
 		}
 			
 	}
-
-	public void delete() throws FileNotFoundException, IOException, ParseException{
+	
+	public void delete() throws FileNotFoundException, IOException, ParseException {
 		
 		new AddressBook();
 		System.out.println("Enter first name");
 		fname = Util.inputString();
 		
 		boolean flag=false;
-		for(int i=0; i<userArray.size(); i++)
+		for (Person obj : personList) 
 		{
-			JSONObject obj= (JSONObject) userArray.get(i);
-			System.out.println(obj);
-	
-			if(obj.get("first name").equals(fname))
+			if(obj.getFname().equals(fname))
 			{	
-				userArray.remove(i);
-				
-				fileWriter=new FileWriter(userFile);
-				fileWriter.write(userArray.toJSONString());
-				fileWriter.close();
-				
+				personList.remove(obj);
 				flag=true;
 				break;
 			}
@@ -140,130 +135,65 @@ public class AddressBook {
 		{
 			System.out.println(fname+" contact deleted!");
 		}
+		
+		
 			
 	}
-
-	@SuppressWarnings("unchecked")
-	public void sortName() throws FileNotFoundException, IOException, ParseException{
+	
+	public void sortName() throws FileNotFoundException, IOException, ParseException {
 		
 		new AddressBook();
-		int len=userArray.size();
-		String names[]=new String[len];
+		List<String> names=new ArrayList<>();
 		
-		for(int i=0; i<len; i++)
+		for (Person i : personList) 
 		{
-			JSONObject obj= (JSONObject) userArray.get(i);
-			
-			names[i]=(String) obj.get("first name");
+			names.add(i.getLname());
 		}
 		
-		Util.bubbleSort(len, names);
+		Collections.sort(names);
 		
-		JSONArray newarr=new JSONArray();
-		for(int i=0; i<names.length; i++)
-		{			
-			for(int j=0; j<userArray.size(); j++)
+		for (String name : names) 
+		{
+			for (Person i : personList) 
 			{
-				JSONObject obj= (JSONObject) userArray.get(j);
-				if(names[i].equals(obj.get("first name")))
+				if(name.equals(i.getLname()))
 				{
-					
-					newarr.add(obj);
+					sortedNames.add(i);
 				}
 			}
 		}
 		
+		/*
 		fileWriter=new FileWriter(userFile);
 		fileWriter.write(newarr.toJSONString());
 		fileWriter.close();
-	
+	*/
 	}		
 	
-	@SuppressWarnings("unchecked")
-	public void sortZip() throws FileNotFoundException, IOException, ParseException{
-			
-			new AddressBook();
-			int len=userArray.size();
-			Long zip[]=new Long[len];
-			
-			for(int i=0; i<len; i++)
+	public void sortZip() throws FileNotFoundException, IOException, ParseException {
+		
+		new AddressBook();
+		List<Integer> zip=new ArrayList<>();
+		
+		for (Person i : personList) 
+		{
+			zip.add(i.getAddress().getZip());
+		}
+		
+		Collections.sort(zip);
+		
+		for (Integer z : zip) 
+		{
+			for (Person i : personList) 
 			{
-				JSONObject obj= (JSONObject) userArray.get(i);
-				
-				zip[i]= (Long) obj.get("zip");
-			}
-			
-			Util.bubbleSort(len, zip);
-			
-			JSONArray newarr=new JSONArray();
-			for(int i=0; i<zip.length; i++)
-			{			
-				for(int j=0; j<userArray.size(); j++)
+				if(z.equals(i.getLname()))
 				{
-					JSONObject obj= (JSONObject) userArray.get(j);
-					if(zip[i].equals(obj.get("zip")))
-					{
-						newarr.add(obj);
-					}
+					sortedZip.add(i);
 				}
 			}
-			
-			fileWriter=new FileWriter(userFile);
-			fileWriter.write(newarr.toJSONString());
-			fileWriter.close();
-			
+		}
+		
 	}
-
 	
-	public static void main(String[] args) throws IOException, ParseException {
-
-		do
-		{
-			new Util();
-			AddressBook addbook=new AddressBook();
-			
-			System.out.println("Enter your choice\n1.Add\n2.Edit\n3.Delete\n4.Sort by name\n5.Sort by zip\n6.Exit");
-			int ch=Util.inputInt();
-			switch(ch)
-			{
-			case 1:
-				
-				System.out.println("---ADDING NEW---");
-				addbook.add();
-				System.out.println("New contact added!\n");
-				break;
-				
-			case 2:
-				
-				System.out.println("---EDITING---");
-				addbook.edit();
-				break;
-				
-			case 3:
-				
-				System.out.println("---DELETING---\nEnter contact first name");
-				String name1=Util.inputString();
-				addbook.delete();
-				System.out.println(name1+" contact deleted!\n");
-				break;
-				
-			case 4:
-				
-				addbook.sortName();
-				break;
-				
-			case 5:
-				
-				addbook.sortZip();
-				break;
-			
-			case 6:
-				
-				System.exit(0);
-				
-			}
-			
-		}while(true);
-	}
-
+	
 }
