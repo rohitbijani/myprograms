@@ -1,0 +1,10 @@
+[ {
+  "fname" : "rohit",
+  "lname" : "bijani",
+  "phone" : 830,
+  "address" : {
+    "state" : "mah",
+    "city" : "mumbai",
+    "zip" : 9783
+  }
+} ]

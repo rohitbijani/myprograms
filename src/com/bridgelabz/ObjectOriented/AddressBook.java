@@ -2,42 +2,41 @@ package com.bridgelabz.ObjectOriented;
 
 import com.bridgelabz.Utility.Util;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class AddressBook {
 	
-	AddressBook addressBook; Person person;
+	AddressBook addressBook; Person person; AddressBookManager manager;
 	String fname,lname,state,city; int zip; long phone; Address address;
-	String personFile="/home/bridgeit/workspace/Rohit/Files/addressbook.json";
-	FileWriter fileWriter; FileReader fileReader; BufferedReader reader;
-	JSONParser parser=new JSONParser();	
-	List<Person> personList=new ArrayList<>(); 
+	String path="/home/bridgeit/workspace/Rohit/Files/AddressBooks/";
+	//List<Person> personList; 
 	List<Person> sortedNames=new ArrayList<>();
 	List<Person> sortedZip=new ArrayList<>();
-	ObjectMapper mapper; String jsonString; 
-	
-	/*public AddressBook() throws FileNotFoundException, IOException, ParseException {
+	ObjectMapper mapper; FileWriter fileWriter; FileReader fileReader;
+	static boolean changes;
+
+	public AddressBook() {
 		
-		//	jsonString =  new FileReader(personFile).toString();
-		person = mapper.readValue(new FileReader(personFile), Person.class);			
-			
 	}
-	*/
+	
+	/*public AddressBook(List<Person> personList) throws FileNotFoundException, IOException, ParseException {
+		
+		this.personList=personList;
+			
+	}*/
+	
 	public void add() throws IOException, ParseException {
 		
-		new AddressBook();
 		System.out.println("Enter first name");
 		fname=Util.inputString();
 		System.out.println("Enter last name");
@@ -57,27 +56,24 @@ public class AddressBook {
 		
 		person.setPhone(phone);
 		person.setAddress(state, city, zip);
-		personList.add(person);
+		AddressBookManager.personList.add(person);
 		
-	    //mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		mapper=new ObjectMapper();
-		mapper.writeValue(new File(personFile), personList);
-		
-		//fileWriter.write(mapper.toString());
-		
+		System.out.println("New contact created.... Don't forget to SAVE!!");
+		changes=true;		
 	}
 	
 	public void edit() throws IOException, ParseException {
 		
-		new AddressBook();
 		System.out.println("Enter first name");
 		fname = Util.inputString();
 		
 		boolean flag=false;
-		for (Person obj : personList) 
+		for (Person obj : AddressBookManager.personList) 
 		{
 			if(obj.getFname().equals(fname))
 			{
+				AddressBookManager.personList.remove(obj);
+				
 				System.out.println("Enter last name");
 				lname=Util.inputString();
 				System.out.println("Enter address...");
@@ -93,6 +89,7 @@ public class AddressBook {
 				obj.setLname(lname);
 				obj.setPhone(phone);
 				obj.setAddress(state, city, zip);
+				AddressBookManager.personList.add(obj);
 				
 				flag=true;
 				break;
@@ -105,23 +102,23 @@ public class AddressBook {
 		}
 		else
 		{
-			System.out.println(fname+" contact edited!");
+			changes=true;
+			System.out.println(fname+" contact edited... Don't forget to SAVE!!");
 		}
 			
 	}
 	
 	public void delete() throws FileNotFoundException, IOException, ParseException {
 		
-		new AddressBook();
 		System.out.println("Enter first name");
 		fname = Util.inputString();
 		
 		boolean flag=false;
-		for (Person obj : personList) 
+		for (Person obj : AddressBookManager.personList) 
 		{
 			if(obj.getFname().equals(fname))
 			{	
-				personList.remove(obj);
+				AddressBookManager.personList.remove(obj);
 				flag=true;
 				break;
 			}
@@ -133,67 +130,44 @@ public class AddressBook {
 		}
 		else
 		{
-			System.out.println(fname+" contact deleted!");
+			changes=true;
+			System.out.println(fname+" contact deleted... Don't forget to SAVE!!");
 		}
-		
-		
 			
 	}
 	
 	public void sortName() throws FileNotFoundException, IOException, ParseException {
 		
-		new AddressBook();
-		List<String> names=new ArrayList<>();
-		
-		for (Person i : personList) 
-		{
-			names.add(i.getLname());
-		}
-		
-		Collections.sort(names);
-		
-		for (String name : names) 
-		{
-			for (Person i : personList) 
-			{
-				if(name.equals(i.getLname()))
-				{
-					sortedNames.add(i);
-				}
+		//manager=new AddressBookManager();
+		Comparator<Person> names=new Comparator<Person>() {
+			
+			@Override
+			public int compare(Person o1, Person o2) {
+				
+				return o1.getLname().compareTo(o2.getLname());
 			}
-		}
+		};
 		
-		/*
-		fileWriter=new FileWriter(userFile);
-		fileWriter.write(newarr.toJSONString());
-		fileWriter.close();
-	*/
+		Collections.sort(AddressBookManager.personList, names);
+		
+		changes=true;
 	}		
 	
 	public void sortZip() throws FileNotFoundException, IOException, ParseException {
 		
-		new AddressBook();
-		List<Integer> zip=new ArrayList<>();
-		
-		for (Person i : personList) 
-		{
-			zip.add(i.getAddress().getZip());
-		}
-		
-		Collections.sort(zip);
-		
-		for (Integer z : zip) 
-		{
-			for (Person i : personList) 
-			{
-				if(z.equals(i.getLname()))
-				{
-					sortedZip.add(i);
-				}
+		//manager=new AddressBookManager();
+		Comparator<Person> zip=new Comparator<Person>() {
+			
+			@Override
+			public int compare(Person o1, Person o2) {
+				
+				return o1.getAddress().getZip() - o2.getAddress().getZip();
 			}
-		}
+		};	
 		
-	}
-	
-	
+		Collections.sort(AddressBookManager.personList, zip);
+		
+		changes=true;
+		
+	}	
 }

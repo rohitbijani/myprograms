@@ -5,7 +5,11 @@ public class Person {
 	private String fname;
 	private String lname;
 	private long phone;
-	Address address;
+	private Address address;
+	
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Person(String fname, String lname) {
 		

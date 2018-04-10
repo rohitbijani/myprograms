@@ -1,0 +1,10 @@
+[ {
+  "fname" : "sam",
+  "lname" : "john",
+  "phone" : 7755,
+  "address" : {
+    "state" : "rr",
+    "city" : "tt",
+    "zip" : 45
+  }
+} ]
