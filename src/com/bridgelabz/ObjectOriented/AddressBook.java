@@ -2,11 +2,11 @@ package com.bridgelabz.ObjectOriented;
 
 import com.bridgelabz.Utility.Util;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -19,21 +19,15 @@ public class AddressBook {
 	AddressBook addressBook; Person person; AddressBookManager manager;
 	String fname,lname,state,city; int zip; long phone; Address address;
 	String path="/home/bridgeit/workspace/Rohit/Files/AddressBooks/";
-	//List<Person> personList; 
-	List<Person> sortedNames=new ArrayList<>();
-	List<Person> sortedZip=new ArrayList<>();
-	ObjectMapper mapper; FileWriter fileWriter; FileReader fileReader;
+	List<Person> personList;
 	static boolean changes;
+	ObjectMapper mapper;
 
-	public AddressBook() {
+	public AddressBook() throws FileNotFoundException, IOException, ParseException {
 		
-	}
-	
-	/*public AddressBook(List<Person> personList) throws FileNotFoundException, IOException, ParseException {
-		
-		this.personList=personList;
-			
-	}*/
+		mapper=new ObjectMapper();
+		personList = new ArrayList<>(Arrays.asList(mapper.readValue(new File(path+AddressBookManager.fileName), Person[].class)));
+	}	
 	
 	public void add() throws IOException, ParseException {
 		
@@ -56,7 +50,7 @@ public class AddressBook {
 		
 		person.setPhone(phone);
 		person.setAddress(state, city, zip);
-		AddressBookManager.personList.add(person);
+		personList.add(person);
 		
 		System.out.println("New contact created.... Don't forget to SAVE!!");
 		changes=true;		
@@ -68,11 +62,11 @@ public class AddressBook {
 		fname = Util.inputString();
 		
 		boolean flag=false;
-		for (Person obj : AddressBookManager.personList) 
+		for (Person obj : personList) 
 		{
 			if(obj.getFname().equals(fname))
 			{
-				AddressBookManager.personList.remove(obj);
+				personList.remove(obj);
 				
 				System.out.println("Enter last name");
 				lname=Util.inputString();
@@ -89,7 +83,7 @@ public class AddressBook {
 				obj.setLname(lname);
 				obj.setPhone(phone);
 				obj.setAddress(state, city, zip);
-				AddressBookManager.personList.add(obj);
+				personList.add(obj);
 				
 				flag=true;
 				break;
@@ -114,11 +108,11 @@ public class AddressBook {
 		fname = Util.inputString();
 		
 		boolean flag=false;
-		for (Person obj : AddressBookManager.personList) 
+		for (Person obj : personList) 
 		{
 			if(obj.getFname().equals(fname))
 			{	
-				AddressBookManager.personList.remove(obj);
+				personList.remove(obj);
 				flag=true;
 				break;
 			}
@@ -138,7 +132,6 @@ public class AddressBook {
 	
 	public void sortName() throws FileNotFoundException, IOException, ParseException {
 		
-		//manager=new AddressBookManager();
 		Comparator<Person> names=new Comparator<Person>() {
 			
 			@Override
@@ -148,14 +141,15 @@ public class AddressBook {
 			}
 		};
 		
-		Collections.sort(AddressBookManager.personList, names);
+		Collections.sort(personList, names);
 		
 		changes=true;
+		System.out.println("Sorting done... Don't forget to SAVE!!");
+
 	}		
 	
 	public void sortZip() throws FileNotFoundException, IOException, ParseException {
 		
-		//manager=new AddressBookManager();
 		Comparator<Person> zip=new Comparator<Person>() {
 			
 			@Override
@@ -165,9 +159,9 @@ public class AddressBook {
 			}
 		};	
 		
-		Collections.sort(AddressBookManager.personList, zip);
+		Collections.sort(personList, zip);
 		
 		changes=true;
-		
+		System.out.println("Sorting done... Don't forget to SAVE!!");		
 	}	
 }

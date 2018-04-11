@@ -1,1 +1,19 @@
-[{"fname":"rohit","lname":"jlkdf","phone":830,"address":{"state":"dchj","city":"hjd","zip":93}}]
+[ {
+  "fname" : "rohit",
+  "lname" : "jlkdf",
+  "phone" : 830,
+  "address" : {
+    "state" : "dchj",
+    "city" : "hjd",
+    "zip" : 93
+  }
+}, {
+  "fname" : "rahul",
+  "lname" : "mandalkar",
+  "phone" : 87543,
+  "address" : {
+    "state" : "mh",
+    "city" : "mum",
+    "zip" : 576
+  }
+} ]
