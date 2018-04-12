@@ -2,13 +2,14 @@ package com.bridgelabz.ObjectOriented;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -28,6 +29,7 @@ public class ClinicManager {
 	List<Patient>list=new ArrayList<>();
 	Map<String, List<Patient>> appointMap=new HashMap<>();
 	ObjectMapper mapper;
+	static String appointDate;
 	
 	public ClinicManager() throws JsonParseException, JsonMappingException, IOException {
 		
@@ -50,7 +52,7 @@ public class ClinicManager {
 		doctor.setSpecialization(specialization);
 		doctor.setAvailability(availability);
 		doctorList.add(doctor);
-		save("doctor.json");
+		save("doctor.json",doctorList);
 	}
 	
 	public void addPatient() {
@@ -69,7 +71,7 @@ public class ClinicManager {
 		patient.setPhone(phone);
 		patient.setAge(age);
 		patientList.add(patient);
-		save("patient.json");
+		save("patient.json",patientList);
 	}
 	
 	public void searchDoctor() {
@@ -191,11 +193,11 @@ public class ClinicManager {
 			
 			if(flag1==false)
 			{
-				System.out.println("Doctor doesn't exists!!");
+				System.out.println("Patient doesn't exists!!");
 			}
 			else
 			{
-				System.out.println("Doctor "+doctorName+" exists!");
+				System.out.println("Patient "+patientName+" exists!");
 			}
 			
 			break;
@@ -212,11 +214,11 @@ public class ClinicManager {
 			}			
 			if(flag2==false)
 			{
-				System.out.println("Doctor doesn't exists!!");
+				System.out.println("Patient doesn't exists!!");
 			}
 			else
 			{
-				System.out.println("Doctor exists!");
+				System.out.println("Patient exists!");
 			}
 			
 			break;
@@ -234,11 +236,11 @@ public class ClinicManager {
 			
 			if(flag3==false)
 			{
-				System.out.println("Doctor doesn't exists!!");
+				System.out.println("Patient doesn't exists!!");
 			}
 			else
 			{
-				System.out.println("Doctor exists!");
+				System.out.println("Patient exists!");
 			}
 			
 			break;
@@ -256,11 +258,11 @@ public class ClinicManager {
 			
 			if(flag4==false)
 			{
-				System.out.println("Doctor doesn't exists!!");
+				System.out.println("Patient doesn't exists!!");
 			}
 			else
 			{
-				System.out.println("Doctor exists!");
+				System.out.println("Patient exists!");
 			}
 			
 			break;
@@ -274,13 +276,23 @@ public class ClinicManager {
 	public void appointment() {
 		System.out.println("Enter doctor's name");
 		doctorName=Util.inputString();
-		Date date=new Date();
+		/*Date date=new Date();
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	    appointDate = formatter.format(date);*/
+	    
 		boolean docExists=false;
 		
 		for (Doctor doctor : doctorList) {
 			if(doctor.getDoctorName().equals(doctorName))
 			{
-				patientCount=doctor.getPatientCount();
+				List<Patient>newlist=new ArrayList<>();
+				for (Map.Entry<String, List<Patient>> entry : appointMap.entrySet()) {					
+					if(entry.getKey().equals(doctorName.concat(appointDate))){
+						newlist=entry.getValue();
+					}
+				}				
+			
+				patientCount=newlist.size();
 				System.out.println("Enter patient's name");
 				patientName=Util.inputString();
 				boolean patExists=false;
@@ -288,22 +300,29 @@ public class ClinicManager {
 				for (Patient patient : patientList) {
 					if(patient.getPatientName().equals(patientName))
 					{
+						/*for (Patient obj : newlist) {
+							if(obj.getPatientName().equals(patientName)){
+							System.out.println(patientName+" already has appointment with "+doctorName);
+							return;
+							}
+						}
+							*/
 						if(patientCount<5)
 						{
-							if(patientCount==0){
-								appointMap.put(doctorName.concat(date.getDate()), null);
-							}
-							else if(appointMap.get(doctor).contains(patient)){
-								System.out.println(patientName+" already has appointment with "+doctorName);
-								return;
-							}
-							
-							appointMap.get(doctor).add(patient);
-							System.out.println("Appointment confirmed for "+date);
+							appointMap.put(doctorName.concat(appointDate), newlist);
+							appointMap.get(doctorName.concat(appointDate)).add(patient);
+							System.out.println("Appointment confirmed for "+appointDate);
+														
 						}
 						else{
-							System.out.println("");
+							newlist=new ArrayList<>();
+							System.out.println("Doctor unavailable on "+appointDate);
+							System.out.println("Enter another date(dd/mm/yyyy)");
+							appointDate=Util.inputString();
+							appointMap.put(doctorName.concat(appointDate), newlist);
+							appointMap.get(doctorName.concat(appointDate)).add(patient);
 						}
+						
 						patExists=true;
 						break;
 					}
@@ -324,48 +343,83 @@ public class ClinicManager {
 			System.out.println("Doctor doesn't exist!!");
 		}
 		
+		save("appointment.json",appointMap);
 	}
 
+	public void printReport() {
+		for (Map.Entry<String, List<Patient>> entry : appointMap.entrySet()) {
+			String name=entry.getKey().replaceAll(appointDate, "");
+			System.out.print(name+" : ");
+			System.out.println(entry.getKey().substring(name.length()));
+			Iterator<Patient>iterator=entry.getValue().iterator();
+			int i=1;
+			while(iterator.hasNext()){
+				System.out.println(i+") "+iterator.next());
+				i++;
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+
+	public void popular() {
+	    
+		String doctor=doctorList.get(0).getDoctorName();
+		int size; int max=0;
+		for (Map.Entry<String, List<Patient>> entry : appointMap.entrySet()) {
+			size=entry.getValue().size();
+			if(max<size){
+				max=size;
+				doctor=entry.getKey();
+			}
+		}
+		
+		System.out.println("SELECT...  1.Specialization   2.Doctor");
+		int choice=Util.inputInt();
+		switch (choice) {
+		case 1:
+			for (Doctor doctor2 : doctorList) {
+				if(doctor2.getDoctorName().equals(doctor.replaceAll(appointDate, "")))
+					System.out.println("Popular Specialization: "+doctor2.getSpecialization());
+			}
+			break;
+
+		case 2:
+			System.out.println("Popular Doctor: "+doctor.replaceAll(appointDate, ""));
+			break;
+		default:
+			break;
+		}		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void read() {
 		
 		mapper=new ObjectMapper();
+		Date date=new Date();
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	    appointDate = formatter.format(date);
 		try {
 			doctorList = new ArrayList<Doctor>(Arrays.asList(mapper.readValue(new File(path+"doctor.json"), Doctor[].class)));
 			patientList = new ArrayList<Patient>(Arrays.asList(mapper.readValue(new File(path+"patient.json"), Patient[].class)));			
 			appointMap = new HashMap<String,List<Patient>>(mapper.readValue(new File(path+"appointment.json"), HashMap.class));
 			
-			/*for (Entry<Doctor, List<Patient>> entry : appointMap.entrySet()) {
-				for (Patient obj: entry.getValue()) {
-					list.add(obj);
-				}				
-			}
-			 */
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-		
 	}
 	
-	public void save(String fileName) {
+	public void save(String fileName, Object object) {
 		
 		mapper=new ObjectMapper();
 		try {
-			if(fileName.equals("doctor.json")){
-				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(path+fileName), doctorList);
-			}
-			else if(fileName.equals("patient.json")){
-				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(path+fileName), patientList);
-			}
-			else if(fileName.equals("appoint.json")){
-				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(path+fileName), appointMap);
-
-			}
+			mapper.writerWithDefaultPrettyPrinter().writeValue(new File(path+fileName), object);			
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
 	
 }

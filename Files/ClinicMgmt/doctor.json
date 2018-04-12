@@ -1,0 +1,16 @@
+[ {
+  "doctorName" : "Fernandes",
+  "doctorID" : "abc123",
+  "specialization" : "physio",
+  "availability" : "am"
+}, {
+  "doctorName" : "Sameer",
+  "doctorID" : "d99",
+  "specialization" : "dentist",
+  "availability" : "pm"
+}, {
+  "doctorName" : "Dutta",
+  "doctorID" : "f909",
+  "specialization" : "cardiologist",
+  "availability" : "am"
+} ]

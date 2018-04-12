@@ -12,25 +12,26 @@ public class ClinicMgmtSystem {
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		
 		new Util();
+		System.out.println("******CLINIC MANAGEMENT SYSTEM******");
 		
 		do{
 			ClinicManager manager=new ClinicManager();
 			
-			System.out.println("Enter your choice");
-			System.out.println("1.Add Doctor\n2.Add Patient\n3.Search Doctor\n4.Search Patient\n5.Book appointment\n6.Exit");
+			System.out.println("-----------MENU-----------");
+			System.out.println("1.Add Doctor\n2.Add Patient\n3.Search Doctor\n4.Search Patient\n5.Book appointment"
+					+ "\n6.Print Doctor Patient Report\n7.Popular\n8.Exit");
+			System.out.println("---------------------------");
 			int ch=Util.inputInt();
 			switch(ch)
 			{
 			case 1:
 				manager.addDoctor();
 				System.out.println("New entry created!");
-				System.out.println();
 				break;
 				
 			case 2:
 				manager.addPatient();
 				System.out.println("New entry created!");
-				System.out.println();
 				break;
 			
 			case 3:
@@ -46,7 +47,16 @@ public class ClinicMgmtSystem {
 				break;
 				
 			case 6:
-				System.exit(0);
+				manager.printReport();
+				break;
+				
+			case 7:
+				manager.popular();
+				break;
+				
+			case 8:
+				System.out.println();
+				System.exit(1);
 				
 				
 			}

@@ -6,7 +6,7 @@ public class Doctor {
 	private String doctorID;
 	private String specialization;
 	private String availability;
-	private int patientCount;
+//	private int patientCount;
 	
 	public String getDoctorName() {
 		return doctorName;
@@ -32,11 +32,11 @@ public class Doctor {
 	public void setAvailability(String availability) {
 		this.availability = availability;
 	}
-	public int getPatientCount() {
+	/*public int getPatientCount() {
 		return patientCount;
 	}
 	public void setPatientCount(int patientCount) {
 		this.patientCount = patientCount;
-	}
+	}*/
 	
 }
