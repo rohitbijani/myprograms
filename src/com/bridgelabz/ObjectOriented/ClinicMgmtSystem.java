@@ -12,7 +12,7 @@ public class ClinicMgmtSystem {
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		
 		new Util();
-		System.out.println("******CLINIC MANAGEMENT SYSTEM******");
+		System.out.println("++++ CLINIC MANAGEMENT SYSTEM ++++");
 		
 		do{
 			ClinicManager manager=new ClinicManager();

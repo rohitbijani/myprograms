@@ -18,4 +18,9 @@
   "patientID" : "n567",
   "phone" : 543457,
   "age" : 33
+}, {
+  "patientName" : "Carl",
+  "patientID" : "z89",
+  "phone" : 7803565,
+  "age" : 34
 } ]
