@@ -1,3 +1,12 @@
+/******************************************************************************
+ *  Purpose: Implement Clinic Management System
+ *
+ *  @author  Rohit Bijani
+ *  @version 1.0
+ *  @since   10-04-2018
+ *
+ ******************************************************************************/
+
 package com.bridgelabz.ObjectOriented;
 
 import java.io.IOException;
@@ -55,7 +64,7 @@ public class ClinicMgmtSystem {
 				break;
 				
 			case 8:
-				System.out.println();
+				System.out.println("GOODBYE!");
 				System.exit(1);
 				
 				
