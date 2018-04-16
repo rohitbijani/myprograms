@@ -26,7 +26,6 @@ public class ClinicManager {
 	String path="/home/bridgeit/workspace/Rohit/Files/ClinicMgmt/";
 	List<Doctor>doctorList=new ArrayList<>();
 	List<Patient>patientList=new ArrayList<>();
-	List<Patient>list=new ArrayList<>();
 	Map<String, List<Patient>> appointMap=new HashMap<>();
 	ObjectMapper mapper;
 	String appointDate;
@@ -286,17 +285,17 @@ public class ClinicManager {
 					{
 						while(true)
 						{
-							List<Patient>newlist=new ArrayList<>();
+							List<Patient>newList=new ArrayList<>();
 							for (Map.Entry<String, List<Patient>> entry : appointMap.entrySet()) {					
 								if(entry.getKey().equals(doctorName.concat(appointDate))){
-									newlist=entry.getValue();
+									newList=entry.getValue();
 								}
 							}				
-							patientCount=newlist.size();
+							patientCount=newList.size();
 							
 							if(patientCount<5){
-								newlist.add(patient);
-								appointMap.put(doctorName.concat(appointDate), newlist);
+								newList.add(patient);
+								appointMap.put(doctorName.concat(appointDate), newList);
 								System.out.println("Appointment confirmed for "+appointDate);
 								break;
 							}
