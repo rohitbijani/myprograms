@@ -13,4 +13,9 @@
   "doctorID" : "f909",
   "specialization" : "cardiologist",
   "availability" : "am"
+}, {
+  "doctorName" : "Rohit",
+  "doctorID" : "d233",
+  "specialization" : "dentist",
+  "availability" : "pm"
 } ]

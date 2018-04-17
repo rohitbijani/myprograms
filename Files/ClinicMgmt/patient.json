@@ -23,4 +23,9 @@
   "patientID" : "z89",
   "phone" : 7803565,
   "age" : 34
+}, {
+  "patientName" : "Nikhil",
+  "patientID" : "v909",
+  "phone" : 849333,
+  "age" : 25
 } ]
