@@ -88,11 +88,13 @@ public class LinkedList<T> {
 			if(current.getData().equals(val))
 			{
 				if (current == head) {
-	                head = head.getNext();
-	            }
-	            else {
-	                previous.setNext(current.getNext());
-	            }
+					head = head.getNext();
+				}
+				else {
+					previous.setNext(current.getNext());
+				}
+				
+				size--;
 			}
 			else
 			{
@@ -102,7 +104,6 @@ public class LinkedList<T> {
 			current=current.getNext();
 		}
 		
-		size--;
 	}
 	
 	public void removeAtFirst() {
@@ -110,16 +111,12 @@ public class LinkedList<T> {
 		if(head==null)
 		{
 			System.out.println("List is empty!!");
-		}
-		
-		//T current=head.getData();
+		}		
 		else
 		{
 			head=head.getNext();
 			size--;
-		}
-		
-		size--;
+		}		
 	}
 	
 	public void order()
