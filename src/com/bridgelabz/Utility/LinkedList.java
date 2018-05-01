@@ -5,13 +5,12 @@ public class LinkedList<T> {
 	
 	protected Node<T> head;
 	protected Node<T> tail;
-	int size;
+	protected int size;
 	
 	public LinkedList()
 	{
-		this.head=null;
+		head=null;
 		size=0;
-		
 	}
 	
 	public boolean isEmpty()
@@ -34,12 +33,10 @@ public class LinkedList<T> {
 				return true;
 			}
 			
-			current=current.getNext();
-				
+			current=current.getNext();	
 		}
 		
 		return false;
-		
 	}
 	
 	public void addAtStart(T val)
@@ -55,6 +52,8 @@ public class LinkedList<T> {
 			newNode.setNext(head);
 			head=newNode;
 		}
+		
+		size++;
 	}
 	
 	public void addAtEnd(T val)
@@ -72,9 +71,10 @@ public class LinkedList<T> {
 			{
 				current=current.getNext();
 			}
-			current.setNext(newNode);
-			
+			current.setNext(newNode);	
 		}
+		
+		size++;
 	}
 	
 
@@ -102,6 +102,7 @@ public class LinkedList<T> {
 			current=current.getNext();
 		}
 		
+		size--;
 	}
 	
 	public void removeAtFirst() {
@@ -118,6 +119,7 @@ public class LinkedList<T> {
 			size--;
 		}
 		
+		size--;
 	}
 	
 	public void order()
@@ -174,7 +176,6 @@ public class LinkedList<T> {
 		}
 		
 		return result;
-		
 	}
 	
 	/*public static void main(String[] args) {
